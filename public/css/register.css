@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url('http://localhost/uas-project/public/img/unj-bg1.jpg');
+  background-size:cover;
+  width: 100%;
+  height: 100%;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.container::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(202, 202, 202, 0.733);
+  position: absolute;
+}
+
+.banner, .form-login {
+  height: 100%;
+  z-index: 10;
+  color: rgb(43, 43, 43);
+
+}
+
+.banner {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.banner img {
+  margin-bottom: -4rem;
+}
+
+.banner h1 {
+  color: rgb(32, 109, 65);
+  font-size: 2rem;
+}
+
+.form-login {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+.form-login form {
+  padding: 3rem 0;
+  background-color: aliceblue;
+  height: 100%;
+  border-radius: .8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-title {
+  font-size: 2rem;
+}
+
+form .input-wrapper {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+  margin: auto;
+  position: relative;
+  border-bottom: 2px solid #1F7439;
+  padding-bottom: .5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.form-input .input-icon {
+  margin-right: .5rem;
+  width: 1.5rem;
+}
+
+
+.form-input input {
+  border: none;
+  width: 100%;
+  height: 1.2rem;
+  font-size: 1rem;
+}
+
+.form-input input:focus,
+.captcha input:focus {
+  outline: none;
+}
+
+.form-input .placeholder {
+  position: absolute;
+  left: 1.8rem;
+  color: rgb(143, 143, 143);
+}
+
+.form-input input:focus + .placeholder,
+.form-input input:valid + .placeholder {
+  display: none;
+}
+
+.captcha {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.captcha p {
+  margin-bottom: 1rem;
+}
+
+.captcha-label {
+  display: block;
+  background-color: #686767;
+  border: 1px solid #686767;
+  color: aliceblue;
+  margin: 0;
+  padding: .5rem;
+}
+
+.captcha input {
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  border: 1px solid #1F7439;
+  border-top: none;
+  margin: 0;
+  padding: .5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.submit-form {
+  width: 100%;
+  border: none;
+  background-color: #1F7439;
+  color: aliceblue;
+  font-size: 1rem;
+  padding: .8rem 0;
+  cursor: pointer;
+}
