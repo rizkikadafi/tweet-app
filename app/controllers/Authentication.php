@@ -14,6 +14,9 @@ class Authentication extends Controller {
   }
 
   public function login() {
+    $data['title'] = 'Login'; // tab title
+    $this->view('templates/header', $data);
     $this->view('authentication/login');
+    $this->view('templates/footer', $data);
   }
 }
