@@ -7,16 +7,30 @@ class Authentication extends Controller {
   }
 
   public function register() {
-    $data['title'] = 'Register'; // tab title
-    $this->view('templates/header', $data);
-    $this->view('authentication/register');
-    $this->view('templates/footer', $data);
+    if(isset($_POST['submit'])) {
+      header('Location: ' . BASEURL . '/home');
+      session_start();
+      $_SESSION['user'] = "test";
+      exit;
+    } else {
+      $data['title'] = 'Register'; // tab title
+      $this->view('templates/header', $data);
+      $this->view('authentication/register');
+      $this->view('templates/footer', $data);
+    }
   }
 
   public function login() {
-    $data['title'] = 'Login'; // tab title
-    $this->view('templates/header', $data);
-    $this->view('authentication/login');
-    $this->view('templates/footer', $data);
+    if(isset($_POST['submit'])) {
+      header('Location: ' . BASEURL . '/home');
+      session_start();
+      $_SESSION['user'] = "test";
+      exit;
+    } else {
+      $data['title'] = 'Login'; // tab title
+      $this->view('templates/header', $data);
+      $this->view('authentication/login');
+      $this->view('templates/footer', $data);
+    }
   }
 }

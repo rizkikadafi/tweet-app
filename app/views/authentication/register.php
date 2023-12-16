@@ -19,13 +19,13 @@
 
       <div class="row">
         <div class="col-5 mx-auto px-0">
-          <form action="">
+          <form method="post" action="<?= BASEURL ?>/authentication/register">
             <div class="mb-3 mx-0">
               <label for="exampleFormControlInput1" class="form-label d-block text-start">Email address</label>
               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
             <div class="d-grid mx-auto gap-2">
-              <button type="button" class="btn btn-primary rounded-1 fw-medium">Continue with Email</button>
+              <button type="submit" name="submit" class="btn btn-primary rounded-1 fw-medium">Continue with Email</button>
           </div>
           </form>
         </div>
