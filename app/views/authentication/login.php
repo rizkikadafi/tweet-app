@@ -2,10 +2,28 @@
   <div class="row min-vh-100 align-items-center">
     <div class="col style="border: 1px solid white">
 
-      <div class="row mb-5">
+      <div class="row mb-3">
         <div class="col">
           <img class="mb-3" src="<?= BASEURL; ?>/img/tweet-logo.png" alt="app logo" width="120">
           <h4>Welcome Back!</h4>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-5 mx-auto px-0">
+          <form method="post" action="<?= BASEURL ?>/authentication/register">
+            <div class="mb-3 mx-0">
+              <label for="username" class="form-label d-block text-start">Username</label>
+              <input type="text" name="username" class="form-control" id="username" placeholder="Enter your Username" required>
+            </div>
+            <div class="mb-3 mx-0">
+              <label for="password" class="form-label d-block text-start">Password</label>
+              <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
+            </div>
+            <div class="d-grid mx-auto gap-2">
+              <button type="submit" name="submit" class="btn btn-primary rounded-1 fw-medium">Login</button>
+          </div>
+          </form>
         </div>
       </div>
 
@@ -18,16 +36,8 @@
       </div>
 
       <div class="row">
-        <div class="col-5 mx-auto px-0">
-          <form action="">
-            <div class="mb-3 mx-0">
-              <label for="exampleFormControlInput1" class="form-label d-block text-start">Email address</label>
-              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="d-grid mx-auto gap-2">
-              <button type="button" class="btn btn-primary rounded-1 fw-medium">Continue with Email</button>
-          </div>
-          </form>
+        <div class="col">
+          <p>Belum punya akun? <a href="<?= BASEURL; ?>/authentication/register">Signup</a></p>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 class Home extends Controller {
   public function index() {
     session_start();
-    if(!isset($_SESSION['user'])) {
+    if(!isset($_SESSION['username'])) {
       header('Location: ' . BASEURL . '/authentication/login');
       exit;
     }
