@@ -1,11 +1,17 @@
 <div class="container text-center">
   <div class="row min-vh-100 align-items-center">
-    <div class="col style="border: 1px solid white">
+    <div class="col style=" border: 1px solid white">
 
       <div class="row mb-3">
         <div class="col">
           <img class="mb-3" src="<?= BASEURL; ?>/img/tweet-logo.png" alt="app logo" width="120">
           <h4>Welcome to TweetApp</h4>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="text-start col-5 mx-auto px-0">
+          <?php Flasher::flash() ?>
         </div>
       </div>
 
@@ -26,7 +32,7 @@
             </div>
             <div class="d-grid mx-auto gap-2">
               <button type="submit" name="submit" class="btn btn-primary rounded-1 fw-medium">SignUp</button>
-          </div>
+            </div>
           </form>
         </div>
       </div>

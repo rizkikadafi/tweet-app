@@ -1,9 +1,10 @@
-<?php 
+<?php
 
-class Home extends Controller {
-  public function index() {
-    session_start();
-    if(!isset($_SESSION['username'])) {
+class Home extends Controller
+{
+  public function index()
+  {
+    if (!isset($_SESSION['username'])) {
       header('Location: ' . BASEURL . '/authentication/login');
       exit;
     }
@@ -13,3 +14,4 @@ class Home extends Controller {
     $this->view('templates/footer');
   }
 }
+
