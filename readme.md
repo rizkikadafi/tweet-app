@@ -9,6 +9,10 @@
   - tapi kalo ngga ada session di lempar ke *authentication/login*
  
 # Usage
+- install dependencies
+```
+composer install
+```
 ## Static file
 - Semua static file di taro dalem folder public
 - misal ambil gambar:

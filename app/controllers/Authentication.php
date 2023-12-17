@@ -2,6 +2,13 @@
 
 class Authentication extends Controller
 {
+  private $redirect_uri = BASEURL . '/authentication/login';
+
+  public function __construct()
+  {
+    Google_oauth::setClient(CLIENT_ID, CLIENT_SECRETE, $this->redirect_uri, ['email', 'profile']);
+  }
+
   // default method
   public function index()
   {
@@ -30,7 +37,21 @@ class Authentication extends Controller
 
   public function login()
   {
-    if (isset($_POST['submit'])) {
+    if (isset($_GET['code'])) {
+      var_dump($_GET);
+      $token = Google_oauth::getToken($_GET['code']);
+      var_dump($token);
+      if (isset($token['error'])) {
+        unset($_GET['code']);
+        header('Location: ' . BASEURL . '/authentication/login');
+        exit;
+      }
+
+      $_SESSION['token'] = $token;
+      $_SESSION['user'] = serialize(Google_oauth::getUserInfo());
+      header('Location: ' . BASEURL . '/home');
+      exit;
+    } else if (isset($_POST['submit'])) {
       if ($this->model('User_model')->auth($_POST) > 0) {
         $_SESSION['username'] = $_POST['username'];
         header('Location: ' . BASEURL . '/home');
@@ -42,8 +63,10 @@ class Authentication extends Controller
       }
     } else {
       $data['title'] = 'Login'; // tab title
+      $data['auth_url'] = Google_oauth::$auth_url;
+
       $this->view('templates/header', $data);
-      $this->view('authentication/login');
+      $this->view('authentication/login', $data);
       $this->view('templates/footer', $data);
     }
   }

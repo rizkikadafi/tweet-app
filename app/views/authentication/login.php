@@ -37,7 +37,7 @@
       <div class="row mb-3">
         <div class="col px-0">
           <div class="d-grid col-5 mx-auto gap-2">
-            <button type="button" class="btn btn-secondary rounded-1 fw-medium"><i class="bi bi-google"></i> Continue with Google</button>
+            <a href="<?= $data['auth_url']; ?>" type="button" class="btn btn-secondary rounded-1 fw-medium"><i class="bi bi-google"></i> Continue with Google</a>
           </div>
         </div>
       </div>
