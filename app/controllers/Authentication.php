@@ -52,9 +52,14 @@ class Authentication extends Controller
       header('Location: ' . BASEURL . '/home');
       exit;
     } else if (isset($_POST['submit'])) {
-      if ($this->model('User_model')->auth($_POST) > 0) {
-        $_SESSION['username'] = $_POST['username'];
+      $result = $this->model('User_model')->auth($_POST);
+      if ($result > 0) {
+        $_SESSION['email'] = $_POST['email'];
         header('Location: ' . BASEURL . '/home');
+        exit;
+      } else if ($result == -1) {
+        Flasher::setFlash("Anda belum terdaftar!", "warning");
+        header('Location: ' . BASEURL . '/authentication/login');
         exit;
       } else {
         Flasher::setFlash("Username atau password salah!", "warning");

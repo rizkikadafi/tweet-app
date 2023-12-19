@@ -23,10 +23,6 @@
               <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
             <div class="mb-3 mx-0">
-              <label for="username" class="form-label d-block text-start">Username</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="Enter your Username" required>
-            </div>
-            <div class="mb-3 mx-0">
               <label for="password" class="form-label d-block text-start">Password</label>
               <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
             </div>

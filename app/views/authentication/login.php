@@ -20,8 +20,8 @@
         <div class="col-5 mx-auto px-0">
           <form method="post" action="<?= BASEURL ?>/authentication/login">
             <div class="mb-3 mx-0">
-              <label for="username" class="form-label d-block text-start">Username</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="Enter your Username" required>
+              <label for="email" class="form-label d-block text-start">Email address</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
             <div class="mb-3 mx-0">
               <label for="password" class="form-label d-block text-start">Password</label>
