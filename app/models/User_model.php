@@ -9,6 +9,32 @@ class User_model
     $this->db = new Database();
   }
 
+  public function getUser($email)
+  {
+    $sql = "SELECT * from user WHERE email = ?";
+    $this->db->query($sql);
+    $this->db->bind($email);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
+  public function addUserViaGoogle($data)
+  {
+    $sql = "SELECT * from user ORDER BY user_id DESC LIMIT 1";
+    $this->db->query($sql);
+    $result = $this->db->resultSet();
+    $last_id = $result['user_id'];
+
+    $username = $this->generateUsername($last_id);
+
+    $sql = "INSERT INTO user (fullname, username, email) VALUES (?, ?, ?)";
+    $this->db->query($sql);
+    $this->db->bind($data['name'], $username, $data['email']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
   public function addUser($data)
   {
     if ($this->isExist($data)) {
@@ -41,6 +67,16 @@ class User_model
 
     if ($result) return $result;
     else return false;
+  }
+
+  public function authWithGoogle($data)
+  {
+    $result = $this->isExist($data);
+    if ($result) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   public function auth($data)
