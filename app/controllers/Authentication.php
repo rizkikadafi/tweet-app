@@ -23,14 +23,16 @@ class Authentication extends Controller
         header('Location: ' . BASEURL . '/home');
         exit;
       } else {
-        Flasher::setFlash("Username sudah digunakan!", "warning");
+        Flasher::setFlash("email sudah digunakan!", "warning");
         header('Location: ' . BASEURL . '/authentication/register');
         exit;
       }
     } else {
       $data['title'] = 'Register'; // tab title
+      $data['auth_url'] = Google_oauth::$auth_url;
+
       $this->view('templates/header', $data);
-      $this->view('authentication/register');
+      $this->view('authentication/register', $data);
       $this->view('templates/footer', $data);
     }
   }
@@ -38,23 +40,42 @@ class Authentication extends Controller
   public function login()
   {
     if (isset($_GET['code'])) {
-      var_dump($_GET);
       $token = Google_oauth::getToken($_GET['code']);
-      var_dump($token);
       if (isset($token['error'])) {
         unset($_GET['code']);
         header('Location: ' . BASEURL . '/authentication/login');
         exit;
       }
 
-      $_SESSION['token'] = $token;
-      $_SESSION['user'] = serialize(Google_oauth::getUserInfo());
-      header('Location: ' . BASEURL . '/home');
-      exit;
-    } else if (isset($_POST['submit'])) {
-      if ($this->model('User_model')->auth($_POST) > 0) {
-        $_SESSION['username'] = $_POST['username'];
+      $user_info = Google_oauth::getUserInfo();
+      // var_dump($user_info['email']);
+      $result = $this->model('User_model')->authWithGoogle($user_info);
+
+      if ($result > 0) {
+        $_SESSION['token'] = $token;
+        $_SESSION['email'] = $user_info['email'];
         header('Location: ' . BASEURL . '/home');
+        exit;
+      } else {
+        $result = $this->model('User_model')->addUserViaGoogle($user_info);
+        if ($result) {
+          $_SESSION['token'] = $token;
+          header('Location: ' . BASEURL . '/home');
+          exit;
+        } else {
+          header('Location: ' . BASEURL . '/login');
+          exit;
+        }
+      }
+    } else if (isset($_POST['submit'])) {
+      $result = $this->model('User_model')->auth($_POST);
+      if ($result > 0) {
+        $_SESSION['email'] = $_POST['email'];
+        header('Location: ' . BASEURL . '/home');
+        exit;
+      } else if ($result == -1) {
+        Flasher::setFlash("Anda belum terdaftar!", "warning");
+        header('Location: ' . BASEURL . '/authentication/login');
         exit;
       } else {
         Flasher::setFlash("Username atau password salah!", "warning");

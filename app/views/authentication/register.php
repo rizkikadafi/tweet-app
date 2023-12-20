@@ -23,10 +23,6 @@
               <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
             <div class="mb-3 mx-0">
-              <label for="username" class="form-label d-block text-start">Username</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="Enter your Username" required>
-            </div>
-            <div class="mb-3 mx-0">
               <label for="password" class="form-label d-block text-start">Password</label>
               <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
             </div>
@@ -40,7 +36,7 @@
       <div class="row mb-3">
         <div class="col px-0">
           <div class="d-grid col-5 mx-auto gap-2">
-            <button type="button" class="btn btn-secondary rounded-1 fw-medium"><i class="bi bi-google"></i> Continue with Google</button>
+            <a href="<?= $data['auth_url']; ?>" type="button" class="btn btn-secondary rounded-1 fw-medium"><i class="bi bi-google"></i> Continue with Google</a>
           </div>
         </div>
       </div>

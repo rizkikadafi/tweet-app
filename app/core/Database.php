@@ -51,6 +51,18 @@ class Database
     return $result->fetch_assoc();
   }
 
+  public function resultAllSet()
+  {
+    $this->stmt->execute();
+    $result = $this->stmt->get_result();
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+
+    return $rows;
+  }
+
   public function escapeString($str)
   {
     return $this->dbh->real_escape_string($str);
