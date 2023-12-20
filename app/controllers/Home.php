@@ -12,7 +12,10 @@ class Home extends Controller
     $data['title'] = 'homepage'; // title tab
     $data['styles'] = ['theme.css'];
     $data['scripts'] = ['test.js'];
+
     $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
+    $data['post'] = $this->model('Post_model')->getPostByUserId($data['user']['user_id']);
+    
     $this->view('templates/header', $data);
     $this->view('home/index', $data);
     $this->view('templates/footer', $data);

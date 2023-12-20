@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <img class="me-2" src="<?= BASEURL; ?>/img/tweet-logo.png" width="50" alt="tweet logo">
     <a class="navbar-brand" href="<?= BASEURL; ?>/home">TweetApp</a>
@@ -49,7 +49,7 @@
         <h2><?= $data['user']['fullname'] ?? $data['user']['username']; ?></h2>
         <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
-        <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined Dec 2023</span>
+        <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined <?= date("M Y", strtotime($data['user']['created_at'])); ?></span>
       </div>
       <div class="col align-self-center">
         <div class="row justify-content-end">

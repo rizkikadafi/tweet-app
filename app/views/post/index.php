@@ -40,29 +40,20 @@
 </nav>
 
 <main>
-  <div class="container">
-    <div class="row mt-3 justify-content-center">
-      <div class="col-7">
-        <a href="<?= BASEURL; ?>/post" type="button" class="btn btn-primary">New Post</a>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-7 dark-secondary p-3 rounded">
+        <form method="post" action="<?= BASEURL; ?>/post/new">
+          <input type="hidden" name="user_id" value="<?= $data['user']['user_id']; ?>">
+          <div class="mb-3">
+            <input type="text" name="title" class="form-control form-control-lg" id="title" placeholder="Enter Title...">
+          </div>
+          <div class="mb-3">
+            <textarea name="content" class="form-control" placeholder="Write your post here..." id="content" style="height: 200px"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </form>
       </div>
     </div>
-    <?php foreach ($data['post'] as $post) : ?>
-      <div class="row justify-content-center">
-        <div class="col-7 p-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="user-info mb-3">
-                <img class="rounded-circle me-1" src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="20" height="20">
-                <a href="#" class="link-underline link-underline-opacity-0">
-                  <span class="text-secondary">@<?= $data['user']['username']; ?></span>
-                </a>
-              </div>
-              <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>
-              <p class="card-text"><?= $post['content']; ?></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    <?php endforeach ?>
   </div>
 </main>
