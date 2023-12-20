@@ -27,9 +27,9 @@ class User_model
 
     $username = $this->generateUsername($last_id);
 
-    $sql = "INSERT INTO user (fullname, username, email) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO user (fullname, username, email, picture) VALUES (?, ?, ?, ?)";
     $this->db->query($sql);
-    $this->db->bind($data['name'], $username, $data['email']);
+    $this->db->bind($data['name'], $username, $data['email'], $data['picture']);
     $this->db->execute();
 
     return $this->db->rowCount();

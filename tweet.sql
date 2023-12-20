@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2023 at 07:22 AM
+-- Generation Time: Dec 20, 2023 at 09:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,19 +33,21 @@ CREATE TABLE `user` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `description` varchar(100) DEFAULT NULL
+  `description` varchar(100) DEFAULT NULL,
+  `picture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `description`) VALUES
-(7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL),
-(8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL),
-(9, NULL, 'user50186', 'bbbb@gmail.com', '$2y$10$.8umInztMq1Ux/jruvc.N.VolWhQQg9CVtuiIFfOHcDXgts9a.9R2', NULL),
-(10, NULL, 'user246110', 'jjj@gmail.com', '$2y$10$13hA0ALgik2z1GZNz.k0junKEx8mZNep1kso2/oevfEQpk/zWauJS', NULL),
-(12, 'Rizki Kadafi', 'user723611', 'rizkikadafi11@gmail.com', NULL, NULL);
+INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `description`, `picture`) VALUES
+(7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL),
+(8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL),
+(9, NULL, 'user50186', 'bbbb@gmail.com', '$2y$10$.8umInztMq1Ux/jruvc.N.VolWhQQg9CVtuiIFfOHcDXgts9a.9R2', NULL, NULL),
+(10, NULL, 'user246110', 'jjj@gmail.com', '$2y$10$13hA0ALgik2z1GZNz.k0junKEx8mZNep1kso2/oevfEQpk/zWauJS', NULL, NULL),
+(13, NULL, 'user152413', 'aaa@gmail.com', '$2y$10$dmQtJjK66oFvJ5dptjPJ6uefFo484BhMx60xY/c89m9nFtQBsoyIm', NULL, NULL),
+(14, 'Rizki Kadafi', 'user182314', 'rizkikadafi11@gmail.com', NULL, NULL, 'https://lh3.googleusercontent.com/a/ACg8ocK0d8AB2D10ePfP_ZMSR2rtpJ-hmCFy8MQGfT7IMuFs=s96-c');
 
 --
 -- Indexes for dumped tables
@@ -67,7 +69,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

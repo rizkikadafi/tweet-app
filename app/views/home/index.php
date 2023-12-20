@@ -22,16 +22,18 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<?= BASEURL; ?>/logout">Logout</a></li>
-            </ul>
-          </li>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="<?= BASEURL; ?>/logout">Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

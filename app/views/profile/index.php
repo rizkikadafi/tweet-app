@@ -22,16 +22,18 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<?= BASEURL; ?>/logout">Logout</a></li>
-            </ul>
-          </li>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="<?= BASEURL; ?>/logout">Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -41,10 +43,10 @@
   <div class="container my-5">
     <div class="row justify-content-start">
       <div class="col-2">
-        <img src="https://github.com/mdo.png" alt="" width="200" height="200" class="rounded-circle me-2">
+        <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="200" height="200" class="rounded-circle me-2">
       </div>
       <div class="ps-5 col align-self-center">
-        <h2><?= $data['user']['fullname'] ??$data['user']['username']; ?></h2>
+        <h2><?= $data['user']['fullname'] ?? $data['user']['username']; ?></h2>
         <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
         <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined Dec 2023</span>
