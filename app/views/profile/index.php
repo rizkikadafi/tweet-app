@@ -76,7 +76,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?= BASEURL ?>/profile/edit" method="post">
+        <form action="<?= BASEURL ?>/profile/edit" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<?= $data['user']['user_id'] ?>">
           <div class="mb-3">
             <label for="fullname" class="form-label">Name</label>
