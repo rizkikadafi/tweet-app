@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2023 at 05:50 PM
+-- Generation Time: Dec 20, 2023 at 05:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `user` (
   `fullname` varchar(100) DEFAULT NULL,
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -40,7 +40,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`) VALUES
-(4, NULL, 'rizkikadafi', 'rizkikadafi11@gmail.com', '$2y$10$7DKDOUW.BbWQyGdyOpBlXOZxa1akwYE078PbFULIP5nneEha/.2fe');
+(7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG'),
+(8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe'),
+(9, NULL, 'user50186', 'bbbb@gmail.com', '$2y$10$.8umInztMq1Ux/jruvc.N.VolWhQQg9CVtuiIFfOHcDXgts9a.9R2'),
+(10, NULL, 'user246110', 'jjj@gmail.com', '$2y$10$13hA0ALgik2z1GZNz.k0junKEx8mZNep1kso2/oevfEQpk/zWauJS'),
+(12, 'Rizki Kadafi', 'user723611', 'rizkikadafi11@gmail.com', NULL);
 
 --
 -- Indexes for dumped tables
@@ -51,7 +55,8 @@ INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`) VALU
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -61,7 +66,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

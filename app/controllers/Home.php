@@ -10,6 +10,7 @@ class Home extends Controller
     }
 
     $data['title'] = 'homepage'; // title tab
+    $data['styles'] = ['theme.css'];
     $data['user'] = $_SESSION['user'];
     $this->view('templates/header', $data);
     $this->view('home/index', $data);
