@@ -95,6 +95,20 @@ class User_model
     }
   }
 
+  public function editUser($data)
+  {
+    $sql = "UPDATE user SET
+            fullname = ?,
+            username = ?,
+            description = ?
+            WHERE user_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($data['fullname'], $data['username'], $data['description'], $data['id']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
   private function generateUsername($userId)
   {
     $randomNumber = mt_rand(1000, 9999);

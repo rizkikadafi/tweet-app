@@ -52,14 +52,13 @@ class Authentication extends Controller
       $result = $this->model('User_model')->authWithGoogle($user_info);
 
       if ($result > 0) {
-        $_SESSION['user'] = $this->model('User_model')->getUser($user_info['email']);
         $_SESSION['token'] = $token;
+        $_SESSION['email'] = $user_info['email'];
         header('Location: ' . BASEURL . '/home');
         exit;
       } else {
         $result = $this->model('User_model')->addUserViaGoogle($user_info);
         if ($result) {
-          $_SESSION['user'] = $this->model('User_model')->getUser($user_info['email']);
           $_SESSION['token'] = $token;
           header('Location: ' . BASEURL . '/home');
           exit;
@@ -71,7 +70,7 @@ class Authentication extends Controller
     } else if (isset($_POST['submit'])) {
       $result = $this->model('User_model')->auth($_POST);
       if ($result > 0) {
-        $_SESSION['user'] = $this->model('User_model')->getUser($_POST['email']);
+        $_SESSION['email'] = $_POST['email'];
         header('Location: ' . BASEURL . '/home');
         exit;
       } else if ($result == -1) {

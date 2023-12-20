@@ -61,7 +61,7 @@
     </div>
     <div class="row mt-4">
       <div class="col-5">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, assumenda!</p>
+        <p><?= $data['user']['description']; ?></p>
       </div>
     </div>
   </div>
@@ -76,20 +76,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="">
+        <form action="<?= BASEURL ?>/profile/edit" method="post">
+          <input type="hidden" name="id" value="<?= $data['user']['user_id'] ?>">
           <div class="mb-3">
             <label for="fullname" class="form-label">Name</label>
-            <input type="email" name="name" class="form-control" id="fullname">
+            <input type="text" name="fullname" class="form-control" id="fullname" value="<?= $data['user']['fullname'] ?? $data['user']['username']; ?>">
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" id="username">
+            <input type="text" name="username" class="form-control" id="username" value="<?= $data['user']['username']; ?>">
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <textarea class="form-control" name="description" id="description" rows="3"><?= $data['user']['description']; ?></textarea>
           </div>
-          <a type="submit" class="btn btn-primary">Submit</a>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
       </div>
     </div>
