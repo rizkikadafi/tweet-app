@@ -39,21 +39,34 @@
   </div>
 </nav>
 
-<main>
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-7 dark-secondary p-3 rounded">
-        <form method="post" action="<?= BASEURL; ?>/post/new">
-          <input type="hidden" name="user_id" value="<?= $data['user']['user_id']; ?>">
-          <div class="mb-3">
-            <input type="text" name="title" class="form-control form-control-lg" id="title" placeholder="Enter Title...">
-          </div>
-          <div class="mb-3">
-            <textarea name="content" class="form-control" placeholder="Write your post here..." id="content" style="height: 200px"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Post</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</main>
+<div id="sidebar">
+    <h2>Menu</h2>
+    <ul>
+        <li><a href="?action=friends">Friends</a></li>
+        <li><a href="?action=following">Following</a></li>
+        <li><a href="?action=followed">Followed</a></li>
+    </ul>
+</div>
+
+<div id="main">
+    <h2>Friend List</h2>
+    <ul class="friend-list">
+        <?php
+            $action = isset($_GET['action']) ? $_GET['action'] : 'friends';
+            switch ($action) {
+                case 'friends':
+                    $friends = $data['friends'];
+                    break;
+                case 'following':
+                    $friends = $data['following'];
+                    break;
+                case 'followed':
+                    $friends = $data['followed'];
+                    break;
+                }
+            if ($friends) {
+                foreach ($friends as $friend): ?>
+            <li class="friend-item"><?= $friend['username']; ?></li>
+        <?php endforeach; }?>
+    </ul>
+</div>

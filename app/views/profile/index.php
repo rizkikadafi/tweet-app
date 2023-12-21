@@ -11,7 +11,7 @@
           <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Friends</a>
+          <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/friends">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
