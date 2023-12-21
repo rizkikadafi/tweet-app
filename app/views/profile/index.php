@@ -23,11 +23,11 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
+            <img src="<?= $data['curUser']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['curUser']['fullname'] ?? $data['curUser']['username']; ?></strong>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -54,7 +54,9 @@
       <div class="col align-self-center">
         <div class="row justify-content-end">
           <div class="col-4">
+            <?php if($data['email'] === $_SESSION['email']) { ?>
             <a href="" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+            <?php } ?>
           </div>
         </div>
       </div>

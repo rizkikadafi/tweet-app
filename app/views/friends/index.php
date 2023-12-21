@@ -66,7 +66,11 @@
                 }
             if ($friends) {
                 foreach ($friends as $friend): ?>
-            <li class="friend-item"><?= $friend['username']; ?></li>
+                <li class="friend-item">
+                    <a href="<?= BASEURL; ?>/profile/other/<?= $friend['email']; ?>">
+                        <?= $friend['username']; ?>
+                    </a>
+                </li>
         <?php endforeach; }?>
     </ul>
 </div>
