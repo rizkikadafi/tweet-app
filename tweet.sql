@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 20, 2023 at 06:00 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Dec 21, 2023 at 04:17 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `tweet`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friendship`
+--
+
+CREATE TABLE `friendship` (
+  `friendship_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
+  `status` enum('FOLLOWING','FOLLOWED') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ;
+
+--
+-- Dumping data for table `friendship`
+--
+
+INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `status`, `created_at`) VALUES
+(37, 15, 17, 'FOLLOWING', '2023-12-21 01:13:38'),
+(38, 17, 15, 'FOLLOWED', '2023-12-21 01:13:38'),
+(39, 17, 15, 'FOLLOWING', '2023-12-21 01:13:38'),
+(40, 15, 17, 'FOLLOWED', '2023-12-21 01:13:38'),
+(41, 17, 16, 'FOLLOWING', '2023-12-21 01:13:38'),
+(42, 16, 17, 'FOLLOWED', '2023-12-21 01:13:38'),
+(43, 8, 17, 'FOLLOWING', '2023-12-21 01:13:38'),
+(44, 17, 8, 'FOLLOWED', '2023-12-21 01:13:38');
 
 -- --------------------------------------------------------
 
@@ -71,11 +99,20 @@ INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `des
 (7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
 (8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
 (15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://lh3.googleusercontent.com/a/ACg8ocK0d8AB2D10ePfP_ZMSR2rtpJ-hmCFy8MQGfT7IMuFs=s96-c', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'hello', NULL, '2023-12-20 15:44:39');
+(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'hello', NULL, '2023-12-20 15:44:39'),
+(17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD PRIMARY KEY (`friendship_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `friend_id` (`friend_id`);
 
 --
 -- Indexes for table `post`
@@ -97,6 +134,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `friendship`
+--
+ALTER TABLE `friendship`
+  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
@@ -106,11 +149,18 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD CONSTRAINT `fk_friend_id` FOREIGN KEY (`friend_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `post`
