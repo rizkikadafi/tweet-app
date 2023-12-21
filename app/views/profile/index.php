@@ -42,17 +42,17 @@
 <main>
   <div class="container my-5">
     <div class="row justify-content-start">
-      <div class="col-2">
+      <div class="col-auto">
         <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="200" height="200" class="rounded-circle me-2">
       </div>
-      <div class="ps-5 col align-self-center">
+      <div class="col align-self-center">
         <h2><?= $data['user']['fullname'] ?? $data['user']['username']; ?></h2>
         <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
         <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined <?= date("M Y", strtotime($data['user']['created_at'])); ?></span>
       </div>
-      <div class="col align-self-center">
-        <div class="row justify-content-end">
+      <div class="col-auto align-self-center">
+        <div class="row">
           <div class="col-4">
             <a href="" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
           </div>
