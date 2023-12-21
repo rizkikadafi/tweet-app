@@ -18,6 +18,14 @@ class User_model
     return $result;
   }
 
+  public function getUserIdByusername($data) {
+    $sql = "SELECT user_id from user WHERE username = ?";
+    $this->db->query($sql);
+    $this->db->bind($data);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
   public function addUserViaGoogle($data)
   {
     $sql = "SELECT * from user ORDER BY user_id DESC LIMIT 1";

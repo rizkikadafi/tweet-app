@@ -11,7 +11,7 @@
           <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/friends">Friends</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
@@ -50,12 +50,23 @@
         <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
         <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined <?= date("M Y", strtotime($data['user']['created_at'])); ?></span>
+        <div class="mt-1 friendship-info">
+          <span class="text-white fw-bold"><?= $data['friendship_info']['following_users_count']; ?>
+            <span class="text-secondary">Followers</span>
+          </span>
+          <i class="bi bi-dot text-secondary"></i>
+          <span class="text-white fw-bold"><?= $data['friendship_info']['followed_users_count']; ?>
+            <span class="text-secondary">Following</span>
+          </span>
+        </div>
       </div>
       <div class="col align-self-center">
         <div class="row justify-content-end">
           <div class="col-4">
-            <?php if($data['email'] === $_SESSION['email']) { ?>
-            <a href="" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+            <?php if ($data['email'] === $_SESSION['email']) { ?>
+              <button class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+            <?php } else { ?>
+              <a href="" class="btn btn-outline-primary px-5">Follow</a>
             <?php } ?>
           </div>
         </div>

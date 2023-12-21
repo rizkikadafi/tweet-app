@@ -11,7 +11,7 @@
           <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/friends/mutual">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
@@ -41,28 +41,35 @@
 
 <main>
   <div class="container">
-    <div class="row mt-3 justify-content-center">
+    <div class="py-5 row justify-content-center">
       <div class="col-7">
-        <a href="<?= BASEURL; ?>/post" type="button" class="btn btn-primary">New Post</a>
-      </div>
-    </div>
-    <?php foreach ($data['post'] as $post) : ?>
-      <div class="row justify-content-center">
-        <div class="col-7 p-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="user-info mb-3">
-                <img class="rounded-circle me-1" src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="20" height="20">
-                <a href="#" class="link-underline link-underline-opacity-0">
-                  <span class="text-secondary">@<?= $data['user']['username']; ?></span>
-                </a>
-              </div>
-              <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>
-              <p class="card-text"><?= $post['content']; ?></p>
-            </div>
+        <div class="card">
+          <div class="card-body">
+            <nav class="mb-3 nav nav-pills flex-column flex-sm-row">
+              <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Mutual</a>
+              <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/followers">Followers</a>
+              <a class="flex-sm-fill text-sm-center nav-link active" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/following">Following</a>
+            </nav>
+            <ul class="list-group list-group-flush">
+              <?php foreach($data['friendship_info']['following_users'] as $user) : ?>
+                <li class="list-group-item">
+                  <div class="user">
+                    <div class="row align-items-center">
+                      <div class="col-1">
+                        <img class="rounded-circle" width="40" height="40" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                      </div>
+                      <div class="col">
+                        <span class="d-block text-white fw-bold"><?= $user['fullname'] ?? $user['username']; ?></span>
+                        <a href="" class="link-underline link-underline-opacity-0 text-secondary">@<?= $user['username']; ?></a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <?php endforeach ?>
+            </ul>
           </div>
         </div>
       </div>
-    <?php endforeach ?>
+    </div>
   </div>
 </main>

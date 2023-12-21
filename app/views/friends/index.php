@@ -11,7 +11,7 @@
           <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL; ?>/friends">Friends</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
@@ -39,38 +39,37 @@
   </div>
 </nav>
 
-<div id="sidebar">
-    <h2>Menu</h2>
-    <ul>
-        <li><a href="?action=friends">Friends</a></li>
-        <li><a href="?action=following">Following</a></li>
-        <li><a href="?action=followed">Followed</a></li>
-    </ul>
-</div>
-
-<div id="main">
-    <h2>Friend List</h2>
-    <ul class="friend-list">
-        <?php
-            $action = isset($_GET['action']) ? $_GET['action'] : 'friends';
-            switch ($action) {
-                case 'friends':
-                    $friends = $data['friends'];
-                    break;
-                case 'following':
-                    $friends = $data['following'];
-                    break;
-                case 'followed':
-                    $friends = $data['followed'];
-                    break;
-                }
-            if ($friends) {
-                foreach ($friends as $friend): ?>
-                <li class="friend-item">
-                    <a href="<?= BASEURL; ?>/profile/other/<?= $friend['email']; ?>">
-                        <?= $friend['username']; ?>
-                    </a>
+<main>
+  <div class="container">
+    <div class="py-5 row justify-content-center">
+      <div class="col-7">
+        <div class="card">
+          <div class="card-body">
+            <nav class="mb-3 nav nav-pills flex-column flex-sm-row">
+              <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Mutual</a>
+              <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/followers">Followers</a>
+              <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/following">Following</a>
+            </nav>
+            <ul class="list-group list-group-flush">
+              <?php foreach($data['friendship_info']['mutual_friends'] as $user) : ?>
+                <li class="list-group-item">
+                  <div class="user">
+                    <div class="row align-items-center">
+                      <div class="col-1">
+                        <img class="rounded-circle" width="40" height="40" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                      </div>
+                      <div class="col">
+                        <span class="d-block text-white fw-bold"><?= $user['fullname'] ?? $user['username']; ?></span>
+                        <a href="" class="link-underline link-underline-opacity-0 text-secondary">@<?= $user['username']; ?></a>
+                      </div>
+                    </div>
+                  </div>
                 </li>
-        <?php endforeach; }?>
-    </ul>
-</div>
+              <?php endforeach ?>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -15,6 +15,7 @@ class Profile extends Controller
     $data['curUser'] = $this->model('User_model')->getUser($_SESSION['email']);
     $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
     $data['email'] = $_SESSION['email'];
+    $data['friendship_info'] = $this->model('Friendship_model')->getFriendshipInfo($data['user']['user_id']);
 
     $this->view('templates/header', $data);
     $this->view('profile/index', $data);
@@ -28,7 +29,7 @@ class Profile extends Controller
     exit;
   }
 
-  public function other($email) 
+  public function other($email)
   {
     if (!isset($_SESSION['email'])) {
       header('Location: ' . BASEURL . '/authentication/login');
