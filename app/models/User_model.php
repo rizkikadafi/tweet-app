@@ -18,7 +18,26 @@ class User_model
     return $result;
   }
 
-  public function getUserIdByusername($data) {
+  public function getUserByUsername($username)
+  {
+    $sql = "SELECT * FROM user WHERE username = ?";
+    $this->db->query($sql);
+    $this->db->bind($username);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
+  public function getUserById($userId)
+  {
+    $sql = "SELECT * FROM user WHERE user_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($userId);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
+  public function getUserIdByUsername($data)
+  {
     $sql = "SELECT user_id from user WHERE username = ?";
     $this->db->query($sql);
     $this->db->bind($data);

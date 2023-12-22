@@ -46,15 +46,15 @@
         <a href="<?= BASEURL; ?>/post" type="button" class="btn btn-primary">New Post</a>
       </div>
     </div>
-    <?php foreach ($data['post'] as $post) : ?>
+    <?php foreach ($data['posts'] as $post) : ?>
       <div class="row justify-content-center">
         <div class="col-7 p-3">
           <div class="card">
             <div class="card-body">
               <div class="user-info mb-3">
-                <img class="rounded-circle me-1" src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="20" height="20">
-                <a href="#" class="link-underline link-underline-opacity-0">
-                  <span class="text-secondary">@<?= $data['user']['username']; ?></span>
+                <img class="rounded-circle me-1" src="<?= $post['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="20" height="20">
+                <a href="<?= BASEURL; ?>/profile/<?= $post['user']['username']; ?>" class="link-underline link-underline-opacity-0">
+                  <span class="text-secondary">@<?= $post['user']['username']; ?></span>
                 </a>
               </div>
               <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>

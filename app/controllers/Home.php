@@ -14,8 +14,13 @@ class Home extends Controller
     $data['scripts'] = ['test.js'];
 
     $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
-    $data['post'] = $this->model('Post_model')->getPostByUserId($data['user']['user_id']);
-    
+    $data['posts'] = $this->model('Post_model')->getAllPost();
+    foreach ($data['posts'] as &$post) {
+      $userId = $post['user_id'];
+      $userInfo = $this->model('User_model')->getUserById($userId);
+      $post['user'] = $userInfo;
+    }
+
     $this->view('templates/header', $data);
     $this->view('home/index', $data);
     $this->view('templates/footer', $data);
