@@ -19,8 +19,7 @@
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#searchUserModal">
         </form>
       </ul>
       <ul class="navbar-nav">
@@ -116,6 +115,21 @@
           </div>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="searchUserModal" tabindex="-1" aria-labelledby="searchUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <input class="form-control" id="search-user" placeholder="Type to search user...">
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush" id="search-results">
+        </ul>
       </div>
     </div>
   </div>

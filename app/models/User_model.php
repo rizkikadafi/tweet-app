@@ -18,6 +18,17 @@ class User_model
     return $result;
   }
 
+  public function getUserByKeyword($keyword)
+  {
+    $sql = "SELECT * FROM user WHERE 
+            username LIKE '%$keyword%' OR
+            fullname LIKE '%$keyword%';";
+
+    $this->db->query($sql);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
   public function getUserByUsername($username)
   {
     $sql = "SELECT * FROM user WHERE username = ?";

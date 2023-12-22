@@ -11,6 +11,7 @@ class Friends extends Controller
 
     $data['title'] = 'Friendship'; // title tab
     $data['styles'] = ['theme.css', 'friends.css'];
+    $data['scripts'] = ['search_user.js'];
 
     $data['cur_user'] = $this->model('User_model')->getUser($_SESSION['email']);
     if ($username !== '') {
