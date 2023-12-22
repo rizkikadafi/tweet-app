@@ -1,3 +1,4 @@
+// script for handle search action
 $(document).ready(function() {
   $("#search-user").keyup(function() {
     const keyword = $(this).val();

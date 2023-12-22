@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 21, 2023 at 04:17 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Dec 22, 2023 at 08:52 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,23 +31,17 @@ CREATE TABLE `friendship` (
   `friendship_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `friend_id` int(11) NOT NULL,
-  `status` enum('FOLLOWING','FOLLOWED') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `friendship`
 --
 
-INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `status`, `created_at`) VALUES
-(37, 15, 17, 'FOLLOWING', '2023-12-21 01:13:38'),
-(38, 17, 15, 'FOLLOWED', '2023-12-21 01:13:38'),
-(39, 17, 15, 'FOLLOWING', '2023-12-21 01:13:38'),
-(40, 15, 17, 'FOLLOWED', '2023-12-21 01:13:38'),
-(41, 17, 16, 'FOLLOWING', '2023-12-21 01:13:38'),
-(42, 16, 17, 'FOLLOWED', '2023-12-21 01:13:38'),
-(43, 8, 17, 'FOLLOWING', '2023-12-21 01:13:38'),
-(44, 17, 8, 'FOLLOWED', '2023-12-21 01:13:38');
+INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `created_at`) VALUES
+(70, 15, 16, '2023-12-22 03:54:08'),
+(71, 16, 15, '2023-12-22 03:54:55'),
+(72, 15, 7, '2023-12-22 07:49:51');
 
 -- --------------------------------------------------------
 
@@ -72,7 +66,8 @@ INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`) VALU
 (2, 16, 'coba 2', 'test coba 2', '2023-12-20 16:16:40'),
 (3, 16, 'Coba 3', 'test post 3\r\n', '2023-12-20 16:53:05'),
 (4, 16, 'coba 4', 'test postingan', '2023-12-20 16:53:22'),
-(5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27');
+(5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27'),
+(6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13');
 
 -- --------------------------------------------------------
 
@@ -137,13 +132,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `friendship`
 --
 ALTER TABLE `friendship`
-  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
