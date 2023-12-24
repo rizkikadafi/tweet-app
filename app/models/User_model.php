@@ -124,6 +124,9 @@ class User_model
 
     if ($result) {
       if (password_verify($password, $result["password"])) {
+        if ($data['val1'] + $data['val2'] != $data['captcha']) {
+          return -2;
+        }
         return 1;
       } else {
         return 0;
