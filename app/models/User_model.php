@@ -18,6 +18,44 @@ class User_model
     return $result;
   }
 
+  public function getUserByKeyword($keyword)
+  {
+    $sql = "SELECT * FROM user WHERE 
+            username LIKE '%$keyword%' OR
+            fullname LIKE '%$keyword%';";
+
+    $this->db->query($sql);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
+  public function getUserByUsername($username)
+  {
+    $sql = "SELECT * FROM user WHERE username = ?";
+    $this->db->query($sql);
+    $this->db->bind($username);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
+  public function getUserById($userId)
+  {
+    $sql = "SELECT * FROM user WHERE user_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($userId);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
+  public function getUserIdByUsername($data)
+  {
+    $sql = "SELECT user_id from user WHERE username = ?";
+    $this->db->query($sql);
+    $this->db->bind($data);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
   public function addUserViaGoogle($data)
   {
     $sql = "SELECT * from user ORDER BY user_id DESC LIMIT 1";

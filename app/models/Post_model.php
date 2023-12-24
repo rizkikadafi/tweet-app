@@ -19,12 +19,29 @@ class Post_model
     return $this->db->rowCount();
   }
 
-  public function getPostByUserId($userId) 
+  public function getPostByUserId($userId)
   {
     $sql = "SELECT * FROM post WHERE user_id = ?";
     $this->db->query($sql);
     $this->db->bind($userId);
     $result = $this->db->resultAllSet();
     return $result;
+  }
+
+  public function getAllPost()
+  {
+    $sql = "SELECT * FROM post ORDER BY created_at DESC";
+    $this->db->query($sql);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
+  public function getUserIdByPostId($postId)
+  {
+    $sql = "SELECT user_id FROM post WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $result = $this->db->resultSet();
+    return $result['user_id'];
   }
 }

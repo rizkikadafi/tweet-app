@@ -1,3 +1,6 @@
+<?php
+// var_dump($data['friendship_info']);
+?>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <img class="me-2" src="<?= BASEURL; ?>/img/tweet-logo.png" width="50" alt="tweet logo">
@@ -11,20 +14,19 @@
           <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/friends">Friends</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#searchUserModal">
         </form>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= $data['curUser']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><?= $data['curUser']['fullname'] ?? $data['curUser']['username']; ?></strong>
+            <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['cur_user']['fullname'] ?? $data['cur_user']['username']; ?></strong>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>
@@ -50,12 +52,31 @@
         <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
         <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined <?= date("M Y", strtotime($data['user']['created_at'])); ?></span>
+        <div class="mt-1 friendship-info">
+          <a href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/followers" class="link-underline link-underline-opacity-0">
+            <span id="followers-target-count" class="text-white fw-bold"><?= $data['friendship_info']['followers_count']; ?></span>
+            <span class="text-secondary">Followers</span>
+          </a>
+
+          <i class="bi bi-dot text-secondary"></i>
+
+          <a href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/following" class="link-underline link-underline-opacity-0">
+            <span class="text-white fw-bold"><?= $data['friendship_info']['following_count']; ?></span>
+            <span class="text-secondary">Following</span>
+          </a>
+        </div>
       </div>
       <div class="col align-self-center">
         <div class="row justify-content-end">
           <div class="col-4">
-            <?php if($data['email'] === $_SESSION['email']) { ?>
-            <a href="" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+            <?php if ($data['email'] === $_SESSION['email']) { ?>
+              <button class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+            <?php } else { ?>
+              <?php if ($data['status'] === 'FOLLOWING') { ?>
+                <button class="btn btn-outline-secondary px-5" id="unfollow-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-friend-id="<?= $data['user']['user_id']; ?>" data-status="<?= $data['status']; ?>">Following</button>
+              <?php } else { ?>
+                <button class="btn btn-outline-primary px-5" id="follow-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-friend-id="<?= $data['user']['user_id']; ?>" data-status="<?= $data['status']; ?>">Follow</button>
+              <?php } ?>
             <?php } ?>
           </div>
         </div>
@@ -94,6 +115,21 @@
           </div>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="searchUserModal" tabindex="-1" aria-labelledby="searchUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <input class="form-control" id="search-user" placeholder="Type to search user...">
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush" id="search-results">
+        </ul>
       </div>
     </div>
   </div>
