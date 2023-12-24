@@ -11,6 +11,8 @@ class Post extends Controller
 
     $data['title'] = 'Post'; // tab title
     $data['styles'] = ['theme.css'];
+    $data['scripts'] = ['search_user.js'];
+
     $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
 
     $this->view('templates/header', $data);
@@ -18,8 +20,9 @@ class Post extends Controller
     $this->view('templates/footer', $data);
   }
 
-  public function new() {
-    if($this->model('Post_model')->addPost($_POST) > 0) {
+  public function new()
+  {
+    if ($this->model('Post_model')->addPost($_POST) > 0) {
       header('Location: ' . BASEURL . '/home');
       exit;
     }

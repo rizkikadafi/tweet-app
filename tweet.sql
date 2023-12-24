@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2023 at 06:00 PM
+-- Generation Time: Dec 22, 2023 at 08:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `tweet`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friendship`
+--
+
+CREATE TABLE `friendship` (
+  `friendship_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `friendship`
+--
+
+INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `created_at`) VALUES
+(70, 15, 16, '2023-12-22 03:54:08'),
+(71, 16, 15, '2023-12-22 03:54:55'),
+(72, 15, 7, '2023-12-22 07:49:51');
 
 -- --------------------------------------------------------
 
@@ -44,7 +66,8 @@ INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`) VALU
 (2, 16, 'coba 2', 'test coba 2', '2023-12-20 16:16:40'),
 (3, 16, 'Coba 3', 'test post 3\r\n', '2023-12-20 16:53:05'),
 (4, 16, 'coba 4', 'test postingan', '2023-12-20 16:53:22'),
-(5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27');
+(5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27'),
+(6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13');
 
 -- --------------------------------------------------------
 
@@ -71,11 +94,20 @@ INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `des
 (7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
 (8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
 (15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://lh3.googleusercontent.com/a/ACg8ocK0d8AB2D10ePfP_ZMSR2rtpJ-hmCFy8MQGfT7IMuFs=s96-c', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'hello', NULL, '2023-12-20 15:44:39');
+(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'hello', NULL, '2023-12-20 15:44:39'),
+(17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD PRIMARY KEY (`friendship_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `friend_id` (`friend_id`);
 
 --
 -- Indexes for table `post`
@@ -97,20 +129,33 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `friendship`
+--
+ALTER TABLE `friendship`
+  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD CONSTRAINT `fk_friend_id` FOREIGN KEY (`friend_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `post`

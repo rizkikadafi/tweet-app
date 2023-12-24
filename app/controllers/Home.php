@@ -11,26 +11,18 @@ class Home extends Controller
 
     $data['title'] = 'homepage'; // title tab
     $data['styles'] = ['theme.css'];
-    $data['scripts'] = ['test.js'];
+    $data['scripts'] = ['search_user.js'];
 
     $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
-    $data['post'] = $this->model('Post_model')->getPostByUserId($data['user']['user_id']);
-    
+    $data['posts'] = $this->model('Post_model')->getAllPost();
+    foreach ($data['posts'] as &$post) {
+      $userId = $post['user_id'];
+      $userInfo = $this->model('User_model')->getUserById($userId);
+      $post['user'] = $userInfo;
+    }
+
     $this->view('templates/header', $data);
     $this->view('home/index', $data);
     $this->view('templates/footer', $data);
-
-    // if (isset($_SESSION['token'])) {
-    //   $data['title'] = 'homepage'; // title tab
-    //   $data['user'] = unserialize($_SESSION['user']);
-    //   $this->view('templates/header', $data);
-    //   $this->view('home/index', $data);
-    //   $this->view('templates/footer');
-    // } else if (isset($_SESSION['email'])) {
-    //   $data['title'] = 'homepage'; // title tab
-    //   $this->view('templates/header', $data);
-    //   $this->view('home/index');
-    //   $this->view('templates/footer');
-    // }
   }
 }

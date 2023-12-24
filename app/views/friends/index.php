@@ -11,7 +11,7 @@
           <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
@@ -22,8 +22,8 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
+            <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['cur_user']['fullname'] ?? $data['cur_user']['username']; ?></strong>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>
@@ -39,19 +39,35 @@
 </nav>
 
 <main>
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-7 dark-secondary p-3 rounded">
-        <form method="post" action="<?= BASEURL; ?>/post/new">
-          <input type="hidden" name="user_id" value="<?= $data['user']['user_id']; ?>">
-          <div class="mb-3">
-            <input type="text" name="title" class="form-control form-control-lg" id="title" placeholder="Enter Title...">
+  <div class="container">
+    <div class="py-5 row justify-content-center">
+      <div class="col-7">
+        <div class="card">
+          <div class="card-body">
+            <nav class="mb-3 nav nav-pills flex-column flex-sm-row">
+              <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Mutual</a>
+              <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/followers">Followers</a>
+              <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/following">Following</a>
+            </nav>
+            <ul class="list-group list-group-flush">
+              <?php foreach ($data['friendship_info']['mutual'] as $user) : ?>
+                <li class="list-group-item">
+                  <div class="user">
+                    <div class="row align-items-center">
+                      <div class="col-1">
+                        <img class="rounded-circle" width="40" height="40" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                      </div>
+                      <div class="col">
+                        <span class="d-block text-white fw-bold"><?= $user['fullname'] ?? $user['username']; ?></span>
+                        <a href="<?= BASEURL; ?>/profile/<?= $user['username']; ?>" class="link-underline link-underline-opacity-0 text-secondary">@<?= $user['username']; ?></a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <?php endforeach ?>
+            </ul>
           </div>
-          <div class="mb-3">
-            <textarea name="content" class="form-control" placeholder="Write your post here..." id="content" style="height: 200px"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Post</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -71,5 +87,3 @@
     </div>
   </div>
 </div>
-</main>
-</main>
