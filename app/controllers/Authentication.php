@@ -6,7 +6,7 @@ class Authentication extends Controller
 
   public function __construct()
   {
-    Google_oauth::setClient(CLIENT_ID, CLIENT_SECRETE, $this->redirect_uri, ['email', 'profile']);
+    Google_oauth::setClient(CLIENT_ID, CLIENT_SECRET, $this->redirect_uri, ['email', 'profile']);
   }
 
   // default method

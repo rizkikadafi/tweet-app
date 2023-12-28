@@ -18,7 +18,9 @@ class Home extends Controller
     foreach ($data['posts'] as &$post) {
       $userId = $post['user_id'];
       $userInfo = $this->model('User_model')->getUserById($userId);
+      $intervalTime = $this->model('Post_model')->formatRelativeTime($post['created_at']);
       $post['user'] = $userInfo;
+      $post['interval_time'] = $intervalTime;
     }
 
     $this->view('templates/header', $data);

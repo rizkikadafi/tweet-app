@@ -10,8 +10,8 @@ class Profile extends Controller
     }
 
     $data['title'] = 'Profile'; // title tab
-    $data['styles'] = ['theme.css'];
-    $data['scripts'] = ['follow.js', 'search_user.js'];
+    $data['styles'] = ['theme.css', 'profile_picture.css'];
+    $data['scripts'] = ['follow.js', 'search_user.js', 'upload_image.js'];
 
     $data['cur_user'] = $this->model('User_model')->getUser($_SESSION['email']);
     if ($username !== '') {
@@ -32,7 +32,7 @@ class Profile extends Controller
 
   public function edit()
   {
-    $this->model('User_model')->editUser($_POST);
+    $this->model('User_model')->editUser($_POST, $_FILES);
     header('Location: ' . BASEURL . '/profile');
     exit;
   }

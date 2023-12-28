@@ -1,3 +1,7 @@
+<?php
+// $current_time = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+// var_dump($current_time->diff(new DateTime("2023-12-29 00:20:32", new DateTimeZone('Asia/Jakarta')))->m);
+?>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <img class="me-2" src="<?= BASEURL; ?>/img/tweet-logo.png" width="50" alt="tweet logo">
@@ -55,6 +59,8 @@
                 <a href="<?= BASEURL; ?>/profile/<?= $post['user']['username']; ?>" class="link-underline link-underline-opacity-0">
                   <span class="text-secondary">@<?= $post['user']['username']; ?></span>
                 </a>
+                <i class="bi bi-dot text-secondary"></i>
+                <span class="text-secondary"><?= $post['interval_time']; ?></span>
               </div>
               <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>
               <p class="card-text"><?= $post['content']; ?></p>
