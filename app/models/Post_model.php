@@ -36,6 +36,29 @@ class Post_model
     return $result;
   }
 
+  public function formatRelativeTime($timestamp)
+  {
+    $currentDateTime = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+    $timestampDateTime = new DateTime($timestamp, new DateTimeZone('Asia/Jakarta'));
+    $timeDifference = $currentDateTime->diff($timestampDateTime);
+
+    if ($timeDifference->y > 0) {
+      return $timeDifference->y . ' year' . ($timeDifference->y > 1 ? 's' : '') . ' ago';
+    } elseif ($timeDifference->m > 0) {
+      return $timeDifference->m . ' month' . ($timeDifference->m > 1 ? 's' : '') . ' ago';
+    } elseif ($timeDifference->d > 0) {
+      return $timeDifference->d . ' day' . ($timeDifference->d > 1 ? 's' : '') . ' ago';
+    } elseif ($timeDifference->h > 0) {
+      return $timeDifference->h . ' hour' . ($timeDifference->h > 1 ? 's' : '') . ' ago';
+    } elseif ($timeDifference->i > 0) {
+      return $timeDifference->i . ' minute' . ($timeDifference->i > 1 ? 's' : '') . ' ago';
+    } elseif ($timeDifference->s >= 0) {
+      return 'now';
+    } else {
+      return 'unknown'; // Menangani jika waktu di masa depan
+    }
+  }
+
   public function getUserIdByPostId($postId)
   {
     $sql = "SELECT user_id FROM post WHERE post_id = ?";

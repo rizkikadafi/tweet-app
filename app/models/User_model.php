@@ -1,5 +1,8 @@
 <?php
 
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Cloudinary;
+
 class User_model
 {
   private $db;
@@ -124,6 +127,9 @@ class User_model
 
     if ($result) {
       if (password_verify($password, $result["password"])) {
+        if ($data['val1'] + $data['val2'] != $data['captcha']) {
+          return -2;
+        }
         return 1;
       } else {
         return 0;
@@ -133,15 +139,41 @@ class User_model
     }
   }
 
-  public function editUser($data)
+  public function uploadProfilePicture($file)
   {
+    if (isset($file['profile-img'])) {
+
+      $file = $file['profile-img'];
+      $config = Configuration::instance([
+        'cloud' => [
+          'cloud_name' => IMAGE_HOST_CLOUD_NAME,
+          'api_key' => IMAGE_HOST_API_KEY,
+          'api_secret' => IMAGE_HOST_API_SECRET
+        ],
+        'url' => [
+          'secure' => true
+        ]
+      ]);
+
+      $cloudinary = new Cloudinary($config);
+
+      $result = $cloudinary->uploadApi()->upload($file['tmp_name'], ['public_id' => $file['name']]);
+      return $result;
+    }
+  }
+
+  public function editUser($data, $file)
+  {
+    $result = $this->uploadProfilePicture($file);
+    $_SESSION["upload_result"] = $result;
     $sql = "UPDATE user SET
             fullname = ?,
             username = ?,
-            description = ?
+            description = ?,
+            picture = ?
             WHERE user_id = ?";
     $this->db->query($sql);
-    $this->db->bind($data['fullname'], $data['username'], $data['description'], $data['id']);
+    $this->db->bind($data['fullname'], $data['username'], $data['description'], $result['secure_url'], $data['id']);
     $this->db->execute();
 
     return $this->db->rowCount();

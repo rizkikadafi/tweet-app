@@ -6,7 +6,7 @@ class Authentication extends Controller
 
   public function __construct()
   {
-    Google_oauth::setClient(CLIENT_ID, CLIENT_SECRETE, $this->redirect_uri, ['email', 'profile']);
+    Google_oauth::setClient(CLIENT_ID, CLIENT_SECRET, $this->redirect_uri, ['email', 'profile']);
   }
 
   // default method
@@ -77,6 +77,10 @@ class Authentication extends Controller
         Flasher::setFlash("Anda belum terdaftar!", "warning");
         header('Location: ' . BASEURL . '/authentication/login');
         exit;
+      } else if ($result == -2) {
+        Flasher::setFlash("Captcha salah!", "warning");
+        header('Location: ' . BASEURL . '/authentication/login');
+        exit;
       } else {
         Flasher::setFlash("Username atau password salah!", "warning");
         header('Location: ' . BASEURL . '/authentication/login');
@@ -85,6 +89,7 @@ class Authentication extends Controller
     } else {
       $data['title'] = 'Login'; // tab title
       $data['auth_url'] = Google_oauth::$auth_url;
+      $data['captcha'] = [rand(0, 9), rand(0, 9)];
 
       $this->view('templates/header', $data);
       $this->view('authentication/login', $data);

@@ -1,5 +1,5 @@
 <?php
-// var_dump($data['friendship_info']);
+// var_dump($_SESSION['upload_result']);
 ?>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
@@ -99,8 +99,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div id="upload-alert"></div>
         <form action="<?= BASEURL ?>/profile/edit" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<?= $data['user']['user_id'] ?>">
+          <div class="row justify-content-center">
+            <div class="col-5" id="user-profile">
+              <input type="file" name="profile-img" class="form-control" id="imageInput" aria-describedby="inputGroupFileAddon04" aria-label="Upload" hidden>
+
+              <div class="content">
+                <div id="image-link">
+                  <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="150" height="150" class="rounded-circle border border-secondary">
+                  <div class="content-details">
+                    <h5 class="content-title">Upload Photo</h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
           <div class="mb-3">
             <label for="fullname" class="form-label">Name</label>
             <input type="text" name="fullname" class="form-control" id="fullname" value="<?= $data['user']['fullname'] ?? $data['user']['username']; ?>">

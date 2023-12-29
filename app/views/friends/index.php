@@ -44,7 +44,18 @@
       <div class="col-7">
         <div class="card">
           <div class="card-body">
-            <nav class="mb-3 nav nav-pills flex-column flex-sm-row">
+            <div class="user p-2 mb-3">
+              <div class="row align-items-center">
+                <div class="col-1">
+                  <img class="rounded-circle" width="40" height="40" src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                </div>
+                <div class="col">
+                  <span class="d-block text-white fw-bold"><?= $data['user']['fullname'] ?? $data['user']['username']; ?></span>
+                  <a href="<?= BASEURL; ?>/profile/<?= $data['user']['username']; ?>" class="link-underline link-underline-opacity-0 text-secondary">@<?= $data['user']['username']; ?></a>
+                </div>
+              </div>
+            </div>
+            <nav class="mb-3 nav nav-pills flex-column flex-sm-row border border-secondary rounded p-2">
               <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Mutual</a>
               <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/followers">Followers</a>
               <a class="flex-sm-fill text-sm-center nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/following">Following</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2023 at 08:52 AM
+-- Generation Time: Dec 28, 2023 at 06:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,8 @@ CREATE TABLE `friendship` (
 INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `created_at`) VALUES
 (70, 15, 16, '2023-12-22 03:54:08'),
 (71, 16, 15, '2023-12-22 03:54:55'),
-(72, 15, 7, '2023-12-22 07:49:51');
+(72, 15, 7, '2023-12-22 07:49:51'),
+(73, 16, 7, '2023-12-24 16:58:27');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,9 @@ INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`) VALU
 (3, 16, 'Coba 3', 'test post 3\r\n', '2023-12-20 16:53:05'),
 (4, 16, 'coba 4', 'test postingan', '2023-12-20 16:53:22'),
 (5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27'),
-(6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13');
+(6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13'),
+(7, 16, 'Talking to the moon', 'create post', '2023-12-28 17:20:32'),
+(8, 16, 'Senja', 'rintik hujan', '2023-12-28 17:41:45');
 
 -- --------------------------------------------------------
 
@@ -93,8 +96,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `description`, `picture`, `created_at`) VALUES
 (7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
 (8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
-(15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://lh3.googleusercontent.com/a/ACg8ocK0d8AB2D10ePfP_ZMSR2rtpJ-hmCFy8MQGfT7IMuFs=s96-c', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'hello', NULL, '2023-12-20 15:44:39'),
+(15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781017/_35f8f184-5e2d-471e-8c53-efecb3fd4174.jpeg.jpg', '2023-12-20 14:13:22'),
+(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Cuaca cerah', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781226/_a3687921-ceb8-4495-b12d-64b86e3557c1.jpeg.jpg', '2023-12-20 15:44:39'),
 (17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
 
 --
@@ -132,13 +135,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `friendship`
 --
 ALTER TABLE `friendship`
-  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`

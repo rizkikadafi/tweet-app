@@ -27,6 +27,15 @@
               <label for="password" class="form-label d-block text-start">Password</label>
               <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
             </div>
+            <div class="captcha">
+              <label for="captcha" class="form-label d-block text-start">Captcha</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><?= $data['captcha'][0] ?> + <?= $data['captcha'][1] ?></span>
+                <input type="hidden" name="val1" value="<?= $data['captcha'][0] ?>">
+                <input type="hidden" name="val2" value="<?= $data['captcha'][1] ?>">
+                <input type="text" name="captcha" id="captcha" class="form-control" placeholder="Enter the result">
+              </div>
+            </div>
             <div class="d-grid mx-auto gap-2">
               <button type="submit" name="submit" class="btn btn-primary rounded-1 fw-medium">Login</button>
             </div>
