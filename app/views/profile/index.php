@@ -1,5 +1,5 @@
 <?php
-// var_dump($_SESSION['upload_result']);
+// var_dump($_FILES);
 ?>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
