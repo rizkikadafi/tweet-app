@@ -1,15 +1,6 @@
-<?php
-// $current_time = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-// var_dump($current_time->diff(new DateTime("2023-12-29 00:20:32", new DateTimeZone('Asia/Jakarta')))->m);
-?>
 <main>
   <div class="container">
-    <div class="row mt-3 justify-content-center">
-      <div class="col-7">
-        <a href="<?= BASEURL; ?>/post/new" type="button" class="btn btn-primary">New Post</a>
-      </div>
-    </div>
-    <?php foreach ($data['posts'] as $post) : ?>
+    <?php foreach ($data['post'] as $post) : ?>
       <div class="row justify-content-center">
         <div class="col-7 p-3">
           <div class="card">

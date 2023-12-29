@@ -26,6 +26,7 @@ class Profile extends Controller
     }
 
     $this->view('templates/header', $data);
+    $this->view('templates/navbar', $data);
     $this->view('profile/index', $data);
     $this->view('templates/footer', $data);
   }

@@ -25,6 +25,7 @@ class Friends extends Controller
     }
 
     $this->view('templates/header', $data);
+    $this->view('templates/navbar', $data);
     if ($action === 'mutual') {
       $this->view('friends/index', $data);
     } else if ($action === 'following') {
