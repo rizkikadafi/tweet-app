@@ -9,7 +9,7 @@
       </div>
       <div class="col align-self-center">
         <h2><?= $data['user']['fullname'] ?? $data['user']['username']; ?></h2>
-        <a href="#" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
+        <a href="<?= BASEURL; ?>/profile/<?= $data['user']['username']; ?>" class="text-secondary link-underline link-underline-opacity-0"><?= '@' . $data['user']['username']; ?></a>
         <i class="bi bi-dot text-secondary"></i>
         <span class="text-secondary"><i class="bi bi-geo-alt-fill"></i> Joined <?= date("M Y", strtotime($data['user']['created_at'])); ?></span>
         <div class="mt-1 friendship-info">
