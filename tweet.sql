@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2023 at 07:56 AM
+-- Generation Time: Dec 31, 2023 at 11:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,6 @@ CREATE TABLE `friendship` (
 
 INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `created_at`) VALUES
 (70, 15, 16, '2023-12-22 03:54:08'),
-(72, 15, 7, '2023-12-22 07:49:51'),
 (74, 16, 15, '2023-12-29 07:04:42');
 
 -- --------------------------------------------------------
@@ -63,9 +62,8 @@ CREATE TABLE `likes` (
 INSERT INTO `likes` (`like_id`, `user_id`, `post_id`, `like_at`) VALUES
 (7, 16, 6, '2023-12-31 01:48:02'),
 (10, 15, 6, '2023-12-31 01:49:03'),
-(12, 16, 10, '2023-12-31 05:58:24'),
-(16, 15, 16, '2023-12-31 06:54:36'),
-(17, 15, 10, '2023-12-31 06:54:39');
+(18, 16, 19, '2023-12-31 10:33:53'),
+(19, 15, 19, '2023-12-31 10:34:16');
 
 -- --------------------------------------------------------
 
@@ -78,17 +76,19 @@ CREATE TABLE `post` (
   `user_id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
   `content` varchar(500) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('new','edited') NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`) VALUES
-(6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13'),
-(10, 16, 'Senja', 'bulan purnama', '2023-12-31 05:58:08'),
-(16, 16, 'hola', 'every one 😎', '2023-12-31 06:52:54');
+INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`, `updated_at`, `status`) VALUES
+(6, 15, 'Testing', 'edit posting', '2023-12-22 04:13:13', '2023-12-31 10:35:37', 'edited'),
+(18, 16, 'void', 'console.log(print)\r\ngtk install', '2023-12-31 09:59:35', '2023-12-31 10:00:03', 'edited'),
+(19, 16, 'hello world', 'fn main() {\r\n    println!(\"Hello World!\");\r\n}', '2023-12-31 10:08:35', '2023-12-31 10:08:35', 'new');
 
 -- --------------------------------------------------------
 
@@ -114,8 +114,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `description`, `picture`, `created_at`) VALUES
 (7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
 (8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
-(15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781017/_35f8f184-5e2d-471e-8c53-efecb3fd4174.jpeg.jpg', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Ngopi', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703832546/_7a82f513-2c8e-494d-afea-fc9d4f04c713.jpeg.jpg', '2023-12-20 15:44:39'),
+(15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'new year', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781017/_35f8f184-5e2d-471e-8c53-efecb3fd4174.jpeg.jpg', '2023-12-20 14:13:22'),
+(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Lorem Ipsum dolor sit amet', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703832546/_7a82f513-2c8e-494d-afea-fc9d4f04c713.jpeg.jpg', '2023-12-20 15:44:39'),
 (17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
 
 --
@@ -167,13 +167,13 @@ ALTER TABLE `friendship`
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user`
