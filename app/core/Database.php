@@ -5,6 +5,7 @@ class Database
   private $host = DB_HOST;
   private $user = DB_USER;
   private $pass = DB_PASS;
+  private $port = DB_PORT;
   private $db_name = DB_NAME;
 
   private $dbh;
@@ -12,7 +13,7 @@ class Database
 
   public function __construct()
   {
-    $this->dbh = new mysqli($this->host, $this->user, $this->pass, $this->db_name);
+    $this->dbh = new mysqli($this->host, $this->user, $this->pass, $this->db_name, $this->port);
 
     if ($this->dbh->connect_error) {
       die("Connection failed: " . $this->dbh->connect_error);
@@ -57,7 +58,7 @@ class Database
     $result = $this->stmt->get_result();
     $rows = array();
     while ($row = $result->fetch_assoc()) {
-        $rows[] = $row;
+      $rows[] = $row;
     }
 
     return $rows;
@@ -73,4 +74,3 @@ class Database
     return $this->stmt->affected_rows;
   }
 }
-

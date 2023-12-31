@@ -4,6 +4,13 @@ $(document).ready(function() {
     const userId = $(this).data('user-id');
     const friendId = $(this).data('friend-id');
 
+    const followersCount = parseInt($('#followers-target-count').text(), 10);
+    // console.log(val);
+    $("#follow-btn").html('Following');
+    $("#follow-btn").removeClass('btn-outline-primary');
+    $("#follow-btn").addClass('btn-outline-secondary');
+    $("#follow-btn").prop('id', 'unfollow-btn');
+    $('#followers-target-count').html(followersCount + 1);
     $.ajax({
       url: 'http://localhost/uas-project/public/friends/follow',
       method: 'POST',
@@ -11,11 +18,6 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(response) {
         console.log(response);
-        $('#followers-target-count').html(response['followers_target_count']);
-        $("#follow-btn").html('Following');
-        $("#follow-btn").removeClass('btn-outline-primary');
-        $("#follow-btn").addClass('btn-outline-secondary');
-        $("#follow-btn").prop('id', 'unfollow-btn');
       },
       error: function(error) {
         console.error(error);
@@ -27,6 +29,13 @@ $(document).ready(function() {
     const userId = $(this).data('user-id');
     const friendId = $(this).data('friend-id');
 
+    const followersCount = parseInt($('#followers-target-count').text(), 10);
+    // console.log(val);
+    $("#unfollow-btn").html('Follow');
+    $("#unfollow-btn").removeClass('btn-outline-secondary');
+    $("#unfollow-btn").addClass('btn-outline-primary');
+    $("#unfollow-btn").prop('id', 'follow-btn');
+    $('#followers-target-count').html(followersCount - 1);
     $.ajax({
       url: 'http://localhost/uas-project/public/friends/unfollow',
       method: 'POST',
@@ -34,11 +43,6 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(response) {
         console.log(response);
-        $('#followers-target-count').html(response['followers_target_count']);
-        $("#unfollow-btn").html('Follow');
-        $("#unfollow-btn").removeClass('btn-outline-secondary');
-        $("#unfollow-btn").addClass('btn-outline-primary');
-        $("#unfollow-btn").prop('id', 'follow-btn');
       },
       error: function(error) {
         console.error(error);

@@ -1,3 +1,6 @@
+<?php
+// var_dump(explode('/',  $_GET['url']));
+?>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <img class="me-2" src="<?= BASEURL; ?>/img/tweet-logo.png" width="50" alt="tweet logo">
@@ -8,13 +11,25 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
+          <?php if (explode('/',  $_GET['url'])[0] == 'home') { ?>
+            <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
+          <?php } else { ?>
+            <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
+          <?php } ?>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['user']['username']; ?>/mutual">Friends</a>
+          <?php if (explode('/',  $_GET['url'])[0] == 'friends') { ?>
+            <a class="nav-link active" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
+          <?php } else { ?>
+            <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
+          <?php } ?>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL; ?>/post">Post</a>
+          <?php if (explode('/',  $_GET['url'])[0] == 'post') { ?>
+            <a class="nav-link active" href="<?= BASEURL; ?>/post">Post</a>
+          <?php } else { ?>
+            <a class="nav-link" href="<?= BASEURL; ?>/post">Post</a>
+          <?php } ?>
         </li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-center">
@@ -25,8 +40,8 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><?= $data['user']['fullname'] ?? $data['user']['username']; ?></strong>
+            <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $data['cur_user']['fullname'] ?? $data['cur_user']['username']; ?></strong>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="<?= BASEURL; ?>/profile">Profile</a></li>

@@ -1,0 +1,5 @@
+.bi-heart:hover,
+.bi-heart-fill:hover {
+  color: #DC3545;
+  cursor: pointer;
+}

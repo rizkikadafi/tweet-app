@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 28, 2023 at 06:43 PM
+-- Generation Time: Dec 31, 2023 at 03:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,9 +40,31 @@ CREATE TABLE `friendship` (
 
 INSERT INTO `friendship` (`friendship_id`, `user_id`, `friend_id`, `created_at`) VALUES
 (70, 15, 16, '2023-12-22 03:54:08'),
-(71, 16, 15, '2023-12-22 03:54:55'),
 (72, 15, 7, '2023-12-22 07:49:51'),
-(73, 16, 7, '2023-12-24 16:58:27');
+(74, 16, 15, '2023-12-29 07:04:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `like_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `like_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`like_id`, `user_id`, `post_id`, `like_at`) VALUES
+(7, 16, 6, '2023-12-31 01:48:02'),
+(9, 15, 7, '2023-12-31 01:49:02'),
+(10, 15, 6, '2023-12-31 01:49:03'),
+(11, 16, 8, '2023-12-31 02:25:43');
 
 -- --------------------------------------------------------
 
@@ -97,7 +119,7 @@ INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `des
 (7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
 (8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
 (15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'my first account', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781017/_35f8f184-5e2d-471e-8c53-efecb3fd4174.jpeg.jpg', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Cuaca cerah', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781226/_a3687921-ceb8-4495-b12d-64b86e3557c1.jpeg.jpg', '2023-12-20 15:44:39'),
+(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Ngopi', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703832546/_7a82f513-2c8e-494d-afea-fc9d4f04c713.jpeg.jpg', '2023-12-20 15:44:39'),
 (17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
 
 --
@@ -111,6 +133,14 @@ ALTER TABLE `friendship`
   ADD PRIMARY KEY (`friendship_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `friend_id` (`friend_id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`like_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `post`
@@ -135,7 +165,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `friendship`
 --
 ALTER TABLE `friendship`
-  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `friendship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -159,6 +195,13 @@ ALTER TABLE `user`
 ALTER TABLE `friendship`
   ADD CONSTRAINT `fk_friend_id` FOREIGN KEY (`friend_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
 
 --
 -- Constraints for table `post`

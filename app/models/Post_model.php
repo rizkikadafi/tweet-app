@@ -76,4 +76,47 @@ class Post_model
     $result = $this->db->resultSet();
     return $result['user_id'];
   }
+
+  public function getPostLikes($postId)
+  {
+    $sql = "SELECT COUNT(*) AS like_count
+            FROM likes WHERE post_id = ?;";
+
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $result = $this->db->resultSet();
+    return $result['like_count'];
+  }
+
+  public function likeStatus($userId, $postId)
+  {
+    $sql = "SELECT COUNT(*) AS like_count FROM likes WHERE user_id = ? AND post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($userId, $postId);
+    $result = $this->db->resultSet();
+    if ($result['like_count'] > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public function likePost($userId, $postId)
+  {
+    $sql = "INSERT INTO likes (user_id, post_id) VALUES (?, ?)";
+    $this->db->query($sql);
+    $this->db->bind($userId, $postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function unlikePost($postId)
+  {
+    $sql = "DELETE FROM likes WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }
