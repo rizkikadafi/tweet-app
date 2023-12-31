@@ -46,7 +46,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="<?= $data['cur_user']['picture']; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong><?= $data['cur_user']['fullname'] ?? $data['cur_user']['username']; ?></strong>
           </a>
           <ul class="dropdown-menu">

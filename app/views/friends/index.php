@@ -7,7 +7,7 @@
             <div class="user p-2 mb-3">
               <div class="row align-items-center">
                 <div class="col-1">
-                  <img class="rounded-circle" width="40" height="40" src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                  <img class="rounded-circle" width="40" height="40" src="<?= $data['user']['picture']; ?>" alt="">
                 </div>
                 <div class="col">
                   <span class="d-block text-white fw-bold"><?= $data['user']['fullname'] ?? $data['user']['username']; ?></span>
@@ -26,7 +26,7 @@
                   <div class="user">
                     <div class="row align-items-center">
                       <div class="col-1">
-                        <img class="rounded-circle" width="40" height="40" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="">
+                        <img class="rounded-circle" width="40" height="40" src="<?= $user['picture']; ?>" alt="">
                       </div>
                       <div class="col">
                         <span class="d-block text-white fw-bold"><?= $user['fullname'] ?? $user['username']; ?></span>

@@ -88,10 +88,10 @@ class User_model
 
       $username = $this->generateUsername($last_id);
 
-      $sql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
+      $sql = "INSERT INTO user (username, email, password, picture) VALUES (?, ?, ?, ?)";
       $password = $this->db->escapeString($data['password']);
       $this->db->query($sql);
-      $this->db->bind($username, $data['email'], password_hash($password, PASSWORD_DEFAULT));
+      $this->db->bind($username, $data['email'], password_hash($password, PASSWORD_DEFAULT), "https://res.cloudinary.com/dk0kmgvb7/image/upload/v1704043566/profile_thumbnail.jpg");
       $this->db->execute();
 
       return $this->db->rowCount();

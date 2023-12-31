@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-header py-3">
             <div class="user-info">
-              <img class="rounded-circle me-1" src="<?= $data['post']['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="20" height="20">
+              <img class="rounded-circle me-1" src="<?= $data['post']['user']['picture']; ?>" alt="" width="20" height="20">
               <a href="<?= BASEURL; ?>/profile/<?= $data['post']['user']['username']; ?>" class="link-underline link-underline-opacity-0">
                 <span class="text-secondary">@<?= $data['post']['user']['username']; ?></span>
               </a>

@@ -67,7 +67,7 @@ class Profile extends Controller
           <div class="user">
             <div class="row align-items-center">
               <div class="col-1 me-3">
-                <img class="rounded-circle" width="40" height="40" src="' . ($user['picture'] ?? BASEURL . "/img/profile.jpeg") . '">
+                <img class="rounded-circle" width="40" height="40" src="' . ($user['picture']) . '">
               </div>
               <div class="col">
                 <span class="d-block text-white fw-bold">' . ($user['fullname'] ?? $user['username']) . '</span>

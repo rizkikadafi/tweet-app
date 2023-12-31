@@ -5,7 +5,7 @@
   <div class="container my-5">
     <div class="row justify-content-start">
       <div class="col-auto">
-        <img src="<?= $data['user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="200" height="200" class="rounded-circle me-2">
+        <img src="<?= $data['user']['picture']; ?>" alt="" width="200" height="200" class="rounded-circle me-2">
       </div>
       <div class="col align-self-center">
         <h2><?= $data['user']['fullname'] ?? $data['user']['username']; ?></h2>
@@ -68,7 +68,7 @@
 
               <div class="content">
                 <div id="image-link">
-                  <img src="<?= $data['cur_user']['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="150" height="150" class="rounded-circle border border-secondary">
+                  <img src="<?= $data['cur_user']['picture']; ?>" alt="" width="150" height="150" class="rounded-circle border border-secondary">
                   <div class="content-details">
                     <h5 class="content-title">Upload Photo</h5>
                   </div>
