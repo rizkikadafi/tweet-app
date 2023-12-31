@@ -14,6 +14,12 @@
               <a href="<?= BASEURL; ?>/profile/<?= $data['post']['user']['username']; ?>" class="link-underline link-underline-opacity-0">
                 <span class="text-secondary">@<?= $data['post']['user']['username']; ?></span>
               </a>
+
+              <?php if ($data['post']['status'] == 'edited') { ?>
+                <i class="bi bi-dot text-secondary"></i>
+                <span class="text-secondary">Edited</span>
+              <?php } ?>
+
               <i class="bi bi-dot text-secondary"></i>
               <span class="text-secondary"><?= $data['post']['interval_time']; ?></span>
             </div>

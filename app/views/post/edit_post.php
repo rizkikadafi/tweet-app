@@ -2,8 +2,9 @@
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-7 dark-secondary p-3 rounded">
-        <form method="post" action="<?= BASEURL; ?>/post/new">
+        <form method="post" action="<?= BASEURL; ?>/post/edit/<?= $data['post']['post_id']; ?>">
           <input type="hidden" name="user_id" value="<?= $data['cur_user']['user_id']; ?>">
+          <input type="hidden" name="post_id" value="<?= $data['post']['post_id']; ?>">
           <div class="mb-3">
             <input type="text" name="title" class="form-control form-control-lg" id="title" value="<?= $data['post']["title"]; ?>" placeholder="Enter Title...">
           </div>

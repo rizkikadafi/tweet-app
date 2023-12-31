@@ -25,10 +25,11 @@ class Post_model
             user_id = ?,
             title = ?,
             content = ?,
-            WHERE post_id = ?";
+            status = 'edited'
+            WHERE post_id = ?;";
 
     $this->db->query($sql);
-    $this->db->bind($data['user_id'], $data['title'], $data['content']);
+    $this->db->bind($data['user_id'], $data['title'], $data['content'], $data['post_id']);
     $this->db->execute();
 
     return $this->db->rowCount();
@@ -54,7 +55,7 @@ class Post_model
 
   public function getAllPost()
   {
-    $sql = "SELECT * FROM post ORDER BY created_at DESC";
+    $sql = "SELECT * FROM post ORDER BY updated_at DESC";
     $this->db->query($sql);
     $result = $this->db->resultAllSet();
     return $result;

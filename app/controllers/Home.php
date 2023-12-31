@@ -17,7 +17,7 @@ class Home extends Controller
     $data['cur_user'] = $this->model('User_model')->getUser($_SESSION['email']);
     $data['posts'] = $this->model('Post_model')->getAllPost();
     foreach ($data['posts'] as &$post) {
-      $intervalTime = $this->model('Post_model')->formatRelativeTime($post['created_at']);
+      $intervalTime = $this->model('Post_model')->formatRelativeTime($post['updated_at']);
       $post['user'] = $this->model('User_model')->getUserById($post['user_id']);
       $post['like_count'] = $this->model('Post_model')->getPostLikes($post['post_id']);
       $post['cur_user_liked'] = $this->model('Post_model')->likeStatus($data['cur_user']['user_id'], $post['post_id']);

@@ -164,19 +164,21 @@ class User_model
 
   public function editUser($data, $file)
   {
-    if (isset($file['profile-img']) && !empty($file['profile-img'])) {
+    if ($file['profile-img']['name']) {
       $result = $this->uploadProfilePicture($file);
+    } else {
+      $result['secure_url'] = $this->getUserById($data['id'])['picture'];
     }
-    // $_SESSION["upload_result"] = $result;
+
     $sql = "UPDATE user SET
             fullname = ?,
             username = ?,
             description = ?,
             picture = ?
             WHERE user_id = ?";
-    $cur_user_profile = $this->getUserById($data['id'])['picture'];
+
     $this->db->query($sql);
-    $this->db->bind($data['fullname'], $data['username'], $data['description'], $result['secure_url'] ?? $cur_user_profile, $data['id']);
+    $this->db->bind($data['fullname'], $data['username'], $data['description'], $result['secure_url'], $data['id']);
     $this->db->execute();
 
     return $this->db->rowCount();

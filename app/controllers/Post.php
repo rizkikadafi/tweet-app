@@ -21,7 +21,7 @@ class Post extends Controller
     $this->view('templates/navbar', $data);
     if ($postId == "") {
       foreach ($data['post'] as &$post) {
-        $intervalTime = $this->model('Post_model')->formatRelativeTime($post['created_at']);
+        $intervalTime = $this->model('Post_model')->formatRelativeTime($post['updated_at']);
         $post['user'] = $data['cur_user'];
         $post['cur_user_liked'] = $this->model('Post_model')->likeStatus($data['cur_user']['user_id'], $post['post_id']);
         $post['like_count'] = $this->model('Post_model')->getPostLikes($post['post_id']);
@@ -31,7 +31,7 @@ class Post extends Controller
       $this->view('templates/footer', $data);
     } else {
       $data['post'] = $this->model('Post_model')->getPostById($postId);
-      $intervalTime = $this->model('Post_model')->formatRelativeTime($data['post']['created_at']);
+      $intervalTime = $this->model('Post_model')->formatRelativeTime($data['post']['updated_at']);
       $data['post']['user'] = $this->model('User_model')->getUserById($data['post']['user_id']);
       $data['post']['cur_user_liked'] = $this->model('Post_model')->likeStatus($data['cur_user']['user_id'], $data['post']['post_id']);
       $data['post']['like_count'] = $this->model('Post_model')->getPostLikes($data['post']['post_id']);

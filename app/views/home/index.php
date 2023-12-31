@@ -19,6 +19,12 @@
                 <a href="<?= BASEURL; ?>/profile/<?= $post['user']['username']; ?>" class="link-underline link-underline-opacity-0">
                   <span class="text-secondary">@<?= $post['user']['username']; ?></span>
                 </a>
+
+                <?php if ($post['status'] == 'edited') { ?>
+                  <i class="bi bi-dot text-secondary"></i>
+                  <span class="text-secondary">Edited</span>
+                <?php } ?>
+
                 <i class="bi bi-dot text-secondary"></i>
                 <span class="text-secondary"><?= $post['interval_time']; ?></span>
               </div>
@@ -59,6 +65,7 @@
       </div>
       <div class="modal-body">
         <ul class="list-group list-group-flush" id="search-results">
+
         </ul>
       </div>
     </div>
