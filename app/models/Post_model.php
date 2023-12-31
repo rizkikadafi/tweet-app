@@ -19,12 +19,27 @@ class Post_model
     return $this->db->rowCount();
   }
 
+  public function editPost($data)
+  {
+    $sql = "UPDATE post SET
+            user_id = ?,
+            title = ?,
+            content = ?,
+            WHERE post_id = ?";
+
+    $this->db->query($sql);
+    $this->db->bind($data['user_id'], $data['title'], $data['content']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
   public function getPostById($postId)
   {
     $sql = "SELECT * FROM post WHERE post_id = ?";
     $this->db->query($sql);
     $this->db->bind($postId);
-    $result = $this->db->resultAllSet();
+    $result = $this->db->resultSet();
     return $result;
   }
 
@@ -113,6 +128,16 @@ class Post_model
   public function unlikePost($postId)
   {
     $sql = "DELETE FROM likes WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function deletePost($postId)
+  {
+    $sql = "DELETE FROM post WHERE post_id = ?";
     $this->db->query($sql);
     $this->db->bind($postId);
     $this->db->execute();

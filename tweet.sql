@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2023 at 03:35 AM
+-- Generation Time: Dec 31, 2023 at 07:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,9 +62,10 @@ CREATE TABLE `likes` (
 
 INSERT INTO `likes` (`like_id`, `user_id`, `post_id`, `like_at`) VALUES
 (7, 16, 6, '2023-12-31 01:48:02'),
-(9, 15, 7, '2023-12-31 01:49:02'),
 (10, 15, 6, '2023-12-31 01:49:03'),
-(11, 16, 8, '2023-12-31 02:25:43');
+(12, 16, 10, '2023-12-31 05:58:24'),
+(16, 15, 16, '2023-12-31 06:54:36'),
+(17, 15, 10, '2023-12-31 06:54:39');
 
 -- --------------------------------------------------------
 
@@ -85,14 +86,9 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`) VALUES
-(1, 16, 'Coba', 'mau coba post', '2023-12-20 16:00:55'),
-(2, 16, 'coba 2', 'test coba 2', '2023-12-20 16:16:40'),
-(3, 16, 'Coba 3', 'test post 3\r\n', '2023-12-20 16:53:05'),
-(4, 16, 'coba 4', 'test postingan', '2023-12-20 16:53:22'),
-(5, 15, 'Test post', 'coba post di akun laen', '2023-12-20 16:59:27'),
 (6, 15, 'Testing', 'testing post hari ini', '2023-12-22 04:13:13'),
-(7, 16, 'Talking to the moon', 'create post', '2023-12-28 17:20:32'),
-(8, 16, 'Senja', 'rintik hujan', '2023-12-28 17:41:45');
+(10, 16, 'Senja', 'bulan purnama', '2023-12-31 05:58:08'),
+(16, 16, 'hola', 'every one 😎', '2023-12-31 06:52:54');
 
 -- --------------------------------------------------------
 
@@ -140,7 +136,7 @@ ALTER TABLE `friendship`
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`like_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `post_id` (`post_id`);
+  ADD KEY `likes_ibfk_2` (`post_id`);
 
 --
 -- Indexes for table `post`
@@ -171,13 +167,13 @@ ALTER TABLE `friendship`
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -201,7 +197,7 @@ ALTER TABLE `friendship`
 --
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `post`

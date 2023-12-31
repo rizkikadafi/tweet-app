@@ -11,21 +11,27 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <?php if (explode('/',  $_GET['url'])[0] == 'home') { ?>
+          <?php if (!isset($_GET['url'])) { ?>
+            <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
+          <?php } else if (explode('/',  $_GET['url'])[0] == 'home') { ?>
             <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
           <?php } else { ?>
             <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/home">Home</a>
           <?php } ?>
         </li>
         <li class="nav-item">
-          <?php if (explode('/',  $_GET['url'])[0] == 'friends') { ?>
+          <?php if (!isset($_GET['url'])) { ?>
+            <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
+          <?php } else if (explode('/',  $_GET['url'])[0] == 'friends') { ?>
             <a class="nav-link active" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
           <?php } else { ?>
             <a class="nav-link" href="<?= BASEURL; ?>/friends/<?= $data['cur_user']['username']; ?>/mutual">Friends</a>
           <?php } ?>
         </li>
         <li class="nav-item">
-          <?php if (explode('/',  $_GET['url'])[0] == 'post') { ?>
+          <?php if (!isset($_GET['url'])) { ?>
+            <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/post">Post</a>
+          <?php } else if (!isset($_GET['url']) || explode('/',  $_GET['url'])[0] == 'post') { ?>
             <a class="nav-link active" href="<?= BASEURL; ?>/post">Post</a>
           <?php } else { ?>
             <a class="nav-link" href="<?= BASEURL; ?>/post">Post</a>

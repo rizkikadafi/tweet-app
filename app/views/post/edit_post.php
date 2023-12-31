@@ -5,10 +5,10 @@
         <form method="post" action="<?= BASEURL; ?>/post/new">
           <input type="hidden" name="user_id" value="<?= $data['cur_user']['user_id']; ?>">
           <div class="mb-3">
-            <input type="text" name="title" class="form-control form-control-lg" id="title" placeholder="Enter Title...">
+            <input type="text" name="title" class="form-control form-control-lg" id="title" value="<?= $data['post']["title"]; ?>" placeholder="Enter Title...">
           </div>
           <div class="mb-3">
-            <textarea name="content" class="form-control" placeholder="Write your post here..." id="content" style="height: 200px"></textarea>
+            <textarea name="content" class="form-control" placeholder="Write your post here..." id="content" style="height: 200px"><?= $data['post']['content']; ?></textarea>
           </div>
           <button type="submit" name="post" class="btn btn-primary">Post</button>
         </form>

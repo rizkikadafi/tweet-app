@@ -25,7 +25,9 @@
             </div>
 
             <div class="card-body" onclick="window.location='<?= BASEURL; ?>/post/<?= $post['post_id']; ?>';" style="cursor:pointer;">
-              <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>
+              <?php if ($post['title']) : ?>
+                <h5 class="card-title fw-bold"><?= $post['title']; ?></h5>
+              <?php endif ?>
               <p class="card-text"><?= $post['content']; ?></p>
             </div>
 
