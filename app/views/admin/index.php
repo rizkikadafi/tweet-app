@@ -5,19 +5,19 @@
     <?php foreach ($data['user'] as $user) : ?>
       <div class="row justify-content-center">
         <div class="col-auto mt-3 mb-3">
-            <div class="card btn btn-sm btn-secondary text-start" onclick="window.location='<?= BASEURL; ?>/editdata/<?= $user['user_id']; ?>';" style="width: 30rem;">
-                <div class="card-body row">
-                    <div class="col-auto">
-                      <img class="rounded-circle" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="50">
-                    </div>
+          <div class="card btn btn-sm btn-secondary text-start" onclick="window.location='<?= BASEURL; ?>/admin/edit/<?= $user['user_id']; ?>';" style="width: 30rem;">
+            <div class="card-body row">
+              <div class="col-auto">
+                <img class="rounded-circle" src="<?= $user['picture'] ?? BASEURL . '/img/profile.jpeg'; ?>" alt="" width="50">
+              </div>
 
-                    <div class="col">
-                      <h5 class="card-title"><?= $user['email']; ?></h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">@<?= $user['username']; ?></h6>
-                    </div>
-                    
-                </div>
+              <div class="col">
+                <h5 class="card-title"><?= $user['email']; ?></h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@<?= $user['username']; ?></h6>
+              </div>
+
             </div>
+          </div>
 
 
         </div>
