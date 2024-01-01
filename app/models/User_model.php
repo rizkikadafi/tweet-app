@@ -86,11 +86,24 @@ class User_model
 
   public function updateUser($data)
   {
-    $sql = "UPDATE user SET email = ?, password = ? WHERE user_id = ?";
-    $passHash = password_hash($data['inpPassword'], PASSWORD_DEFAULT);
-    $this->db->query($sql);
-    $this->db->bind($data['inpEmail'], $passHash, $data['user_id']);
-    $this->db->execute();
+    if ($data['inpPassword']) {
+
+      $sql = "UPDATE user SET 
+            email = ?, 
+            password = ? 
+            WHERE user_id = ?";
+      $passHash = password_hash($data['inpPassword'], PASSWORD_DEFAULT);
+      $this->db->query($sql);
+      $this->db->bind($data['inpEmail'], $passHash, $data['user_id']);
+      $this->db->execute();
+    } else {
+      $sql = "UPDATE user SET 
+            email = ? 
+            WHERE user_id = ?";
+      $this->db->query($sql);
+      $this->db->bind($data['inpEmail'], $data['user_id']);
+      $this->db->execute();
+    }
 
     return $this->db->rowCount();
   }
@@ -103,7 +116,6 @@ class User_model
     $this->db->execute();
 
     return $this->db->rowCount();
-    
   }
 
   public function addUser($data)

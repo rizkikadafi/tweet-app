@@ -4,10 +4,10 @@ class Admin extends Controller
 {
   public function index()
   {
-    // if (!isset($_SESSION['email'])) {
-    //   header('Location: ' . BASEURL . '/authentication/login');
-    //   exit;
-    // }
+    if (!isset($_SESSION['admin'])) {
+      header('Location: ' . BASEURL . '/admin/login');
+      exit;
+    }
 
     $data['title'] = 'homepage admin'; // title tab
     $data['styles'] = ['theme.css', 'like.css'];
@@ -21,12 +21,42 @@ class Admin extends Controller
     $this->view('templates/footer', $data);
   }
 
+  public function login()
+  {
+    $admin_username = 'tweet-app-admin';
+    $admin_password = 'tweet-app-admin';
+
+    $data['title'] = 'Admin Login'; // tab title
+    $data['captcha'] = [rand(0, 9), rand(0, 9)];
+
+    if (isset($_POST['submit'])) {
+      if ($_POST['username'] == $admin_username && $_POST['password'] == $admin_password) {
+        if ($_POST['val1'] + $_POST['val2'] != $_POST['captcha']) {
+          Flasher::setFlash("captcha salah", "warning");
+          header('Location: ' . BASEURL . '/admin/login');
+          exit;
+        }
+        $_SESSION['admin'] = $admin_username;
+        header('Location: ' . BASEURL . '/admin');
+        exit;
+      } else {
+        Flasher::setFlash("username atau password salah!", "warning");
+        header('Location: ' . BASEURL . '/admin/login');
+        exit;
+      }
+    } else {
+      $this->view('templates/header', $data);
+      $this->view('admin/login', $data);
+      $this->view('templates/footer', $data);
+    }
+  }
+
   public function edit($userId)
   {
-    // if (!isset($_SESSION['email'])) {
-    //   header('Location: ' . BASEURL . '/authentication/login');
-    //   exit;
-    // }
+    if (!isset($_SESSION['admin'])) {
+      header('Location: ' . BASEURL . '/admin/login');
+      exit;
+    }
 
     $data['title'] = 'homepage admin'; // title tab
     $data['styles'] = ['theme.css', 'like.css'];
@@ -48,10 +78,10 @@ class Admin extends Controller
         exit;
       }
     } else {
-      // if (!isset($_SESSION['email'])) {
-      //   header('Location: ' . BASEURL . '/authentication/login');
-      //   exit;
-      // }
+      if (!isset($_SESSION['admin'])) {
+        header('Location: ' . BASEURL . '/admin/login');
+        exit;
+      }
 
       $data['title'] = 'Edit Data for Admin'; // tab title
       $data['styles'] = ['theme.css'];
@@ -74,10 +104,10 @@ class Admin extends Controller
         exit;
       }
     } else {
-      // if (!isset($_SESSION['email'])) {
-      //   header('Location: ' . BASEURL . '/authentication/login');
-      //   exit;
-      // }
+      if (!isset($_SESSION['admin'])) {
+        header('Location: ' . BASEURL . '/admin/login');
+        exit;
+      }
 
       $data['title'] = 'Edit Data for Admin'; // tab title
       $data['styles'] = ['theme.css'];

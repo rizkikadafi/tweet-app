@@ -25,8 +25,6 @@
           </div>
 
           <div class="card-body">
-            <!-- <h5 class="card-title">User Details</h5> -->
-            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
             <form method="post" action="<?= BASEURL; ?>/admin/updateUser">
               <input type="hidden" name="user_id" value="<?= $data['user_current']['user_id']; ?>">
               <div class="mb-3">
@@ -45,13 +43,13 @@
               </div>
 
               <div class="mb-3">
-                <label for="InputPassword1" class="form-label">Password</label>
-                <input type="password" name="inpPassword" class="form-control" id="InputPassword1" value="<?= $data['user_current']['password']; ?>">
+                <label for="InputPassword1" class="form-label">Set new password</label>
+                <input type="password" name="inpPassword" class="form-control" id="InputPassword1">
               </div>
           </div>
 
           <div class="card-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary" onclick="window.location='<?= BASEURL; ?>/homeadmin';">Back</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location='<?= BASEURL; ?>/admin';">Back</button>
             <button type="submit" name="edit_user" class="btn btn-primary">Save changes</button>
             </form>
           </div>
