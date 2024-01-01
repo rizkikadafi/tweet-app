@@ -1,0 +1,6 @@
+.bi-chat-left-dots {
+  cursor: pointer;
+}
+.bi-chat-left-dots:hover {
+  color: #0D6EFD;
+}

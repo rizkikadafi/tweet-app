@@ -19,6 +19,16 @@ class Post_model
     return $this->db->rowCount();
   }
 
+  public function addPostComment($data)
+  {
+    $sql = "INSERT INTO post (title, content, user_id, parent_id) VALUES (?, ?, ?, ?)";
+    $this->db->query($sql);
+    $this->db->bind($data['title'], $data['content'], $data['user_id'], $data['parent_id']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
   public function editPost($data)
   {
     $sql = "UPDATE post SET
@@ -55,7 +65,7 @@ class Post_model
 
   public function getAllPost()
   {
-    $sql = "SELECT * FROM post ORDER BY updated_at DESC";
+    $sql = "SELECT * FROM post WHERE parent_id IS NULL ORDER BY updated_at DESC";
     $this->db->query($sql);
     $result = $this->db->resultAllSet();
     return $result;
@@ -102,6 +112,42 @@ class Post_model
     $this->db->bind($postId);
     $result = $this->db->resultSet();
     return $result['like_count'];
+  }
+
+  public function getPostComments($postId)
+  {
+    $sql = "SELECT * FROM post WHERE parent_id = ? ORDER BY updated_at DESC";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
+  public function getParentComments($postId)
+  {
+    $this->db->query("CREATE TEMPORARY TABLE IF NOT EXISTS PostChainTable (post_id INT, parent_id INT)");
+    $this->db->execute();
+
+    $this->db->query("INSERT INTO PostChainTable (post_id, parent_id) SELECT post_id, parent_id FROM post WHERE post_id = ?");
+    $this->db->bind($postId);
+    $this->db->execute();
+
+    do {
+      $this->db->query(
+        "INSERT INTO PostChainTable (post_id, parent_id) 
+        SELECT p.post_id, p.parent_id FROM PostChainTable pc 
+        JOIN post p ON pc.parent_id = p.post_id 
+        WHERE pc.parent_id IS NOT NULL"
+      );
+      $this->db->execute();
+    } while ($this->db->rowCount() > 0);
+
+    $this->db->query("SELECT * FROM PostChainTable");
+    $comments = $this->db->resultAllSet();
+
+    $this->db->query("DROP TEMPORARY TABLE IF EXISTS PostChainTable");
+    $this->db->execute();
+    return $comments;
   }
 
   public function likeStatus($userId, $postId)

@@ -39,13 +39,17 @@
 
             <div class="card-footer">
               <div class="row align-items-center">
-                <div class="col-2">
+                <div class="col-4">
                   <?php if ($post['cur_user_liked']) { ?>
                     <i class="bi bi-heart-fill text-danger me-1 unlike-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-post-id="<?= $post['post_id']; ?>"></i>
                   <?php } else { ?>
                     <i class="bi bi-heart me-1 like-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-post-id="<?= $post['post_id']; ?>"></i>
                   <?php } ?>
-                  <span class="text-white like-count" id="like-count" data-post-id="<?= $post['post_id']; ?>"><?= $post['like_count']; ?></span>
+                  <span class="text-white like-count me-4" id="like-count" data-post-id="<?= $post['post_id']; ?>"><?= $post['like_count']; ?></span>
+                  <a href="<?= BASEURL; ?>/post/comment/<?= $post['post_id']; ?>" class="text-white link-underline link-underline-opacity-0 me-1">
+                    <i class="bi bi-chat-left-dots"></i>
+                  </a>
+                  <span class="text-white comment-count me-4" id="comment-count" data-post-id="<?= $post['post_id']; ?>">12</span>
                 </div>
               </div>
             </div>

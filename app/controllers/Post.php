@@ -36,6 +36,18 @@ class Post extends Controller
       $data['post']['cur_user_liked'] = $this->model('Post_model')->likeStatus($data['cur_user']['user_id'], $data['post']['post_id']);
       $data['post']['like_count'] = $this->model('Post_model')->getPostLikes($data['post']['post_id']);
       $data['post']['interval_time'] = $intervalTime;
+      $data['comments'] = $this->model('Post_model')->getPostComments($data['post']['post_id']);
+      // $data['parent_comments'] = $this->model('Post_model')->getParentComments($data['post']['post_id']);
+
+
+      foreach ($data['comments'] as &$comment) {
+        $intervalTime = $this->model('Post_model')->formatRelativeTime($comment['updated_at']);
+        $comment['user'] = $this->model('User_model')->getUserById($comment['user_id']);
+        $comment['like_count'] = $this->model('Post_model')->getPostLikes($comment['post_id']);
+        $comment['cur_user_liked'] = $this->model('Post_model')->likeStatus($data['cur_user']['user_id'], $comment['post_id']);
+        $comment['interval_time'] = $intervalTime;
+      }
+
       $this->view('post/thread', $data);
     }
     $this->view('templates/footer', $data);
@@ -120,5 +132,34 @@ class Post extends Controller
 
     $result = ['status' => 'oke'];
     echo json_encode($result);
+  }
+
+  public function comment($postId)
+  {
+    if (isset($_POST["post"])) {
+      if ($this->model('Post_model')->addPostComment($_POST) > 0) {
+        header('Location: ' . BASEURL . '/post/' . $postId);
+        exit;
+      }
+    } else {
+      if (!isset($_SESSION['email'])) {
+        header('Location: ' . BASEURL . '/authentication/login');
+        exit;
+      }
+
+      $data['title'] = 'Post'; // tab title
+      $data['styles'] = ['theme.css'];
+      $data['scripts'] = ['search_user.js'];
+
+      $data['post'] = $this->model('Post_model')->getPostById($postId);
+      $data['cur_user'] = $this->model('User_model')->getUser($_SESSION['email']);
+      $data['user'] = $this->model('User_model')->getUserById($data['post']['user_id']);
+      $data['post']['interval_time'] = $this->model('Post_model')->formatRelativeTime($data['post']['updated_at']);
+
+      $this->view('templates/header', $data);
+      $this->view('templates/navbar', $data);
+      $this->view('post/comment', $data);
+      $this->view('templates/footer', $data);
+    }
   }
 }

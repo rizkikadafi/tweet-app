@@ -10,7 +10,7 @@ class Home extends Controller
     }
 
     $data['title'] = 'homepage'; // title tab
-    $data['styles'] = ['theme.css', 'like.css'];
+    $data['styles'] = ['theme.css', 'like.css', 'comment.css'];
     $data['scripts'] = ['search_user.js', 'like.js'];
 
     // $data['user'] = $this->model('User_model')->getUser($_SESSION['email']);
