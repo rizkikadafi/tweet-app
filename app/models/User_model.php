@@ -12,9 +12,17 @@ class User_model
     $this->db = new Database();
   }
 
+  public function getAllUser()
+  {
+    $sql = "SELECT * FROM user ORDER BY email ASC";
+    $this->db->query($sql);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
   public function getUser($email)
   {
-    $sql = "SELECT * from user WHERE email = ?";
+    $sql = "SELECT * FROM user WHERE email = ?";
     $this->db->query($sql);
     $this->db->bind($email);
     $result = $this->db->resultSet();
@@ -74,6 +82,28 @@ class User_model
     $this->db->execute();
 
     return $this->db->rowCount();
+  }
+
+  public function updateUser($data)
+  {
+    $sql = "UPDATE user SET email = ?, password = ? WHERE user_id = ?";
+    $passHash = password_hash($data['inpPassword'], PASSWORD_DEFAULT);
+    $this->db->query($sql);
+    $this->db->bind($data['inpEmail'], $passHash, $data['user_id']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function deleteUser($data)
+  {
+    $sql = "DELETE FROM user WHERE user_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($data['id_user']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+    
   }
 
   public function addUser($data)
