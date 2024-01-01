@@ -12,9 +12,17 @@ class User_model
     $this->db = new Database();
   }
 
+  public function getAllUser()
+  {
+    $sql = "SELECT * FROM user ORDER BY email ASC";
+    $this->db->query($sql);
+    $result = $this->db->resultAllSet();
+    return $result;
+  }
+
   public function getUser($email)
   {
-    $sql = "SELECT * from user WHERE email = ?";
+    $sql = "SELECT * FROM user WHERE email = ?";
     $this->db->query($sql);
     $this->db->bind($email);
     $result = $this->db->resultSet();
@@ -71,6 +79,40 @@ class User_model
     $sql = "INSERT INTO user (fullname, username, email, picture) VALUES (?, ?, ?, ?)";
     $this->db->query($sql);
     $this->db->bind($data['name'], $username, $data['email'], $data['picture']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function updateUser($data)
+  {
+    if ($data['inpPassword']) {
+
+      $sql = "UPDATE user SET 
+            email = ?, 
+            password = ? 
+            WHERE user_id = ?";
+      $passHash = password_hash($data['inpPassword'], PASSWORD_DEFAULT);
+      $this->db->query($sql);
+      $this->db->bind($data['inpEmail'], $passHash, $data['user_id']);
+      $this->db->execute();
+    } else {
+      $sql = "UPDATE user SET 
+            email = ? 
+            WHERE user_id = ?";
+      $this->db->query($sql);
+      $this->db->bind($data['inpEmail'], $data['user_id']);
+      $this->db->execute();
+    }
+
+    return $this->db->rowCount();
+  }
+
+  public function deleteUser($data)
+  {
+    $sql = "DELETE FROM user WHERE user_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($data['id_user']);
     $this->db->execute();
 
     return $this->db->rowCount();

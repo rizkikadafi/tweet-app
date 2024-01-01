@@ -5,7 +5,7 @@
       <div class="row mb-3">
         <div class="col">
           <img class="mb-3" src="<?= BASEURL; ?>/img/tweet-logo.png" alt="app logo" width="120">
-          <h4>Welcome Back!</h4>
+          <h4>TweeetApp Admin</h4>
         </div>
       </div>
 
@@ -18,14 +18,14 @@
 
       <div class="row mb-3">
         <div class="col-5 mx-auto px-0">
-          <form method="post" action="<?= BASEURL ?>/authentication/login">
+          <form method="post" action="<?= BASEURL ?>/admin/login">
             <div class="mb-3 mx-0">
-              <label for="email" class="form-label d-block text-start">Email address</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+              <label for="username" class="form-label d-block text-start">Username</label>
+              <input type="username" name="username" class="form-control" id="username" placeholder="Enter admin username" required>
             </div>
             <div class="mb-3 mx-0">
               <label for="password" class="form-label d-block text-start">Password</label>
-              <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
+              <input type="password" name="password" class="form-control" id="password" placeholder="Enter admin Password" required>
             </div>
             <div class="captcha">
               <label for="captcha" class="form-label d-block text-start">Captcha</label>
@@ -40,21 +40,6 @@
               <button type="submit" name="submit" class="btn btn-primary rounded-1 fw-medium">Login</button>
             </div>
           </form>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col px-0">
-          <div class="d-grid col-5 mx-auto gap-2">
-            <a href="<?= $data['auth_url']; ?>" type="button" class="btn btn-secondary rounded-1 fw-medium"><i class="bi bi-google"></i> Continue with Google</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <p class="my-0">Belum punya akun? <a href="<?= BASEURL; ?>/authentication/register">Signup</a></p>
-          <p>Login sebagai <a href="<?= BASEURL; ?>/admin/login">Admin</a></p>
         </div>
       </div>
     </div>
