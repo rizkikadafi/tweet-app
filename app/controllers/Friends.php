@@ -25,6 +25,7 @@ class Friends extends Controller
     }
 
     $this->view('templates/header', $data);
+    $this->view('templates/navbar', $data);
     if ($action === 'mutual') {
       $this->view('friends/index', $data);
     } else if ($action === 'following') {
@@ -39,13 +40,16 @@ class Friends extends Controller
   {
     $this->model('Friendship_model')->followUser($_POST['userId'], $_POST['friendId']);
 
-    $result  = [
-      'followers_count' => $this->model('Friendship_model')->getFollowersCount($_POST['userId']),
-      'following_count' => $this->model('Friendship_model')->getFollowingCount($_POST['userId']),
-      'followers_target_count' => $this->model('Friendship_model')->getFollowersCount($_POST['friendId']),
-      'following_target_count' => $this->model('Friendship_model')->getFollowingCount($_POST['friendId']),
-    ];
+    // $result  = [
+    //   'followers_count' => $this->model('Friendship_model')->getFollowersCount($_POST['userId']),
+    //   'following_count' => $this->model('Friendship_model')->getFollowingCount($_POST['userId']),
+    //   'followers_target_count' => $this->model('Friendship_model')->getFollowersCount($_POST['friendId']),
+    //   'following_target_count' => $this->model('Friendship_model')->getFollowingCount($_POST['friendId']),
+    // ];
 
+    // echo json_encode($result);
+
+    $result = ['status' => 'oke'];
     echo json_encode($result);
   }
 
@@ -53,13 +57,16 @@ class Friends extends Controller
   {
     $this->model('Friendship_model')->unfollowUser($_POST['userId'], $_POST['friendId']);
 
-    $result  = [
-      'followers_count' => $this->model('Friendship_model')->getFollowersCount($_POST['userId']),
-      'following_count' => $this->model('Friendship_model')->getFollowingCount($_POST['userId']),
-      'followers_target_count' => $this->model('Friendship_model')->getFollowersCount($_POST['friendId']),
-      'following_target_count' => $this->model('Friendship_model')->getFollowingCount($_POST['friendId']),
-    ];
+    // $result  = [
+    //   'followers_count' => $this->model('Friendship_model')->getFollowersCount($_POST['userId']),
+    //   'following_count' => $this->model('Friendship_model')->getFollowingCount($_POST['userId']),
+    //   'followers_target_count' => $this->model('Friendship_model')->getFollowersCount($_POST['friendId']),
+    //   'following_target_count' => $this->model('Friendship_model')->getFollowingCount($_POST['friendId']),
+    // ];
 
+    // echo json_encode($result);
+
+    $result = ['status' => 'oke'];
     echo json_encode($result);
   }
 }

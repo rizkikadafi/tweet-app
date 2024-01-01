@@ -88,10 +88,10 @@ class User_model
 
       $username = $this->generateUsername($last_id);
 
-      $sql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
+      $sql = "INSERT INTO user (username, email, password, picture) VALUES (?, ?, ?, ?)";
       $password = $this->db->escapeString($data['password']);
       $this->db->query($sql);
-      $this->db->bind($username, $data['email'], password_hash($password, PASSWORD_DEFAULT));
+      $this->db->bind($username, $data['email'], password_hash($password, PASSWORD_DEFAULT), "https://res.cloudinary.com/dk0kmgvb7/image/upload/v1704043566/profile_thumbnail.jpg");
       $this->db->execute();
 
       return $this->db->rowCount();
@@ -164,14 +164,19 @@ class User_model
 
   public function editUser($data, $file)
   {
-    $result = $this->uploadProfilePicture($file);
-    $_SESSION["upload_result"] = $result;
+    if ($file['profile-img']['name']) {
+      $result = $this->uploadProfilePicture($file);
+    } else {
+      $result['secure_url'] = $this->getUserById($data['id'])['picture'];
+    }
+
     $sql = "UPDATE user SET
             fullname = ?,
             username = ?,
             description = ?,
             picture = ?
             WHERE user_id = ?";
+
     $this->db->query($sql);
     $this->db->bind($data['fullname'], $data['username'], $data['description'], $result['secure_url'], $data['id']);
     $this->db->execute();

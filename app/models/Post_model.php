@@ -19,9 +19,34 @@ class Post_model
     return $this->db->rowCount();
   }
 
+  public function editPost($data)
+  {
+    $sql = "UPDATE post SET
+            user_id = ?,
+            title = ?,
+            content = ?,
+            status = 'edited'
+            WHERE post_id = ?;";
+
+    $this->db->query($sql);
+    $this->db->bind($data['user_id'], $data['title'], $data['content'], $data['post_id']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function getPostById($postId)
+  {
+    $sql = "SELECT * FROM post WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $result = $this->db->resultSet();
+    return $result;
+  }
+
   public function getPostByUserId($userId)
   {
-    $sql = "SELECT * FROM post WHERE user_id = ?";
+    $sql = "SELECT * FROM post WHERE user_id = ? ORDER BY created_at DESC";
     $this->db->query($sql);
     $this->db->bind($userId);
     $result = $this->db->resultAllSet();
@@ -30,7 +55,7 @@ class Post_model
 
   public function getAllPost()
   {
-    $sql = "SELECT * FROM post ORDER BY created_at DESC";
+    $sql = "SELECT * FROM post ORDER BY updated_at DESC";
     $this->db->query($sql);
     $result = $this->db->resultAllSet();
     return $result;
@@ -66,5 +91,58 @@ class Post_model
     $this->db->bind($postId);
     $result = $this->db->resultSet();
     return $result['user_id'];
+  }
+
+  public function getPostLikes($postId)
+  {
+    $sql = "SELECT COUNT(*) AS like_count
+            FROM likes WHERE post_id = ?;";
+
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $result = $this->db->resultSet();
+    return $result['like_count'];
+  }
+
+  public function likeStatus($userId, $postId)
+  {
+    $sql = "SELECT COUNT(*) AS like_count FROM likes WHERE user_id = ? AND post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($userId, $postId);
+    $result = $this->db->resultSet();
+    if ($result['like_count'] > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public function likePost($userId, $postId)
+  {
+    $sql = "INSERT INTO likes (user_id, post_id) VALUES (?, ?)";
+    $this->db->query($sql);
+    $this->db->bind($userId, $postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function unlikePost($postId)
+  {
+    $sql = "DELETE FROM likes WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function deletePost($postId)
+  {
+    $sql = "DELETE FROM post WHERE post_id = ?";
+    $this->db->query($sql);
+    $this->db->bind($postId);
+    $this->db->execute();
+
+    return $this->db->rowCount();
   }
 }

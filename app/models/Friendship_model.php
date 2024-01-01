@@ -53,10 +53,16 @@ class Friendship_model
     //                     SELECT user_id FROM friendship 
     //                     WHERE friend_id = ? AND status = ?))";
 
-    $sql = "SELECT * FROM user WHERE user_id IN (
-    SELECT user_id FROM friendship WHERE friend_id = ? INTERSECT
-    SELECT friend_id FROM friendship WHERE user_id = ?
-    )";
+    // $sql = "SELECT * FROM user WHERE user_id IN (
+    // SELECT user_id FROM friendship WHERE friend_id = ? INTERSECT
+    // SELECT friend_id FROM friendship WHERE user_id = ?
+    // )";
+
+    $sql = "SELECT u.*
+            FROM user u
+            INNER JOIN friendship f1 ON u.user_id = f1.user_id
+            INNER JOIN friendship f2 ON u.user_id = f2.friend_id
+            WHERE f1.friend_id = ? AND f2.user_id = ?;";
 
     $this->db->query($sql);
     $this->db->bind($userId, $userId);
