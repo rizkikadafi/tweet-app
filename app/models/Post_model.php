@@ -123,31 +123,13 @@ class Post_model
     return $result;
   }
 
-  public function getParentComments($postId)
+  public function getParentComment($postId)
   {
-    $this->db->query("CREATE TEMPORARY TABLE IF NOT EXISTS PostChainTable (post_id INT, parent_id INT)");
-    $this->db->execute();
-
-    $this->db->query("INSERT INTO PostChainTable (post_id, parent_id) SELECT post_id, parent_id FROM post WHERE post_id = ?");
+    $sql = "SELECT * FROM post WHERE post_id = (SELECT parent_id FROM post WHERE post_id = ?)";
+    $this->db->query($sql);
     $this->db->bind($postId);
-    $this->db->execute();
-
-    do {
-      $this->db->query(
-        "INSERT INTO PostChainTable (post_id, parent_id) 
-        SELECT p.post_id, p.parent_id FROM PostChainTable pc 
-        JOIN post p ON pc.parent_id = p.post_id 
-        WHERE pc.parent_id IS NOT NULL"
-      );
-      $this->db->execute();
-    } while ($this->db->rowCount() > 0);
-
-    $this->db->query("SELECT * FROM PostChainTable");
-    $comments = $this->db->resultAllSet();
-
-    $this->db->query("DROP TEMPORARY TABLE IF EXISTS PostChainTable");
-    $this->db->execute();
-    return $comments;
+    $result = $this->db->resultSet();
+    return $result;
   }
 
   public function likeStatus($userId, $postId)

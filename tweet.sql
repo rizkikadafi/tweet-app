@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2023 at 11:41 AM
+-- Generation Time: Jan 02, 2024 at 02:20 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,10 +60,7 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`like_id`, `user_id`, `post_id`, `like_at`) VALUES
-(7, 16, 6, '2023-12-31 01:48:02'),
-(10, 15, 6, '2023-12-31 01:49:03'),
-(18, 16, 19, '2023-12-31 10:33:53'),
-(19, 15, 19, '2023-12-31 10:34:16');
+(21, 16, 28, '2024-01-02 01:18:55');
 
 -- --------------------------------------------------------
 
@@ -74,8 +71,9 @@ INSERT INTO `likes` (`like_id`, `user_id`, `post_id`, `like_at`) VALUES
 CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
-  `content` varchar(500) NOT NULL,
+  `content` varchar(1000) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` enum('new','edited') NOT NULL DEFAULT 'new'
@@ -85,10 +83,11 @@ CREATE TABLE `post` (
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `created_at`, `updated_at`, `status`) VALUES
-(6, 15, 'Testing', 'edit posting', '2023-12-22 04:13:13', '2023-12-31 10:35:37', 'edited'),
-(18, 16, 'void', 'console.log(print)\r\ngtk install', '2023-12-31 09:59:35', '2023-12-31 10:00:03', 'edited'),
-(19, 16, 'hello world', 'fn main() {\r\n    println!(\"Hello World!\");\r\n}', '2023-12-31 10:08:35', '2023-12-31 10:08:35', 'new');
+INSERT INTO `post` (`post_id`, `user_id`, `parent_id`, `title`, `content`, `created_at`, `updated_at`, `status`) VALUES
+(21, 16, NULL, 'Testing', 'what hapening??', '2024-01-01 06:44:30', '2024-01-01 06:44:30', 'new'),
+(26, 16, 21, 'comment', 'test', '2024-01-02 01:13:33', '2024-01-02 01:13:33', 'new'),
+(28, 15, NULL, 'test from rizki', 'post rizki', '2024-01-02 01:18:43', '2024-01-02 01:18:43', 'new'),
+(29, 16, 28, 'comment', 'comment from john', '2024-01-02 01:19:20', '2024-01-02 01:19:20', 'new');
 
 -- --------------------------------------------------------
 
@@ -112,11 +111,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `fullname`, `username`, `email`, `password`, `description`, `picture`, `created_at`) VALUES
-(7, NULL, 'user34041', 'name@example.com', '$2y$10$wwQ7.EEaFvNDeBOYL32Y6eUREmyJqr6B4JH3DhYu/Ff3EhlURMhlG', NULL, NULL, '2023-12-20 14:11:38'),
-(8, NULL, 'user75136', 'aaa@hmail.com', '$2y$10$xjLyvjAyVdHF8jF1w5sdluTdUCReZNW5iTxGkTVlYJGbAvha8FhJe', NULL, NULL, '2023-12-20 14:11:38'),
 (15, 'Rizki Kadafi', 'rizkikadafi11', 'rizkikadafi11@gmail.com', NULL, 'new year', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703781017/_35f8f184-5e2d-471e-8c53-efecb3fd4174.jpeg.jpg', '2023-12-20 14:13:22'),
-(16, 'Muhamad Rizki Kadafi', 'rizki', 'bbb@gmail.com', '$2y$10$P649il1XuSp2NKf5jG97We3pecYhakyv6E6qYG.6D21BT0/MQx8DS', 'Lorem Ipsum dolor sit amet', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703832546/_7a82f513-2c8e-494d-afea-fc9d4f04c713.jpeg.jpg', '2023-12-20 15:44:39'),
-(17, NULL, 'user127917', 'dummy@gmail.com', '$2y$10$9N.nVdfa5VwfHLxrHepmAO0kZmQ.GaYLMF/XfbkltbdJBfilk9DEy', NULL, NULL, '2023-12-21 00:50:32');
+(16, 'John', 'john', 'aaa@gmail.com', '$2y$10$dCyCTodmRdObGnkLYA2wJuZrux7YYDyZBnmrZcjccGKg6wnS.7zMm', 'Lorem Ipsum dolor', 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1703832546/_7a82f513-2c8e-494d-afea-fc9d4f04c713.jpeg.jpg', '2023-12-20 15:44:39'),
+(18, NULL, 'user949617', 'ddd@gmail.com', '$2y$10$nzIobcrgu/EV1NLuD1UXseV2Di/zejnJMh9OVvsuAuDCxr1A3hZ.6', NULL, 'https://res.cloudinary.com/dk0kmgvb7/image/upload/v1704043566/profile_thumbnail.jpg', '2024-01-01 15:05:21');
 
 --
 -- Indexes for dumped tables
@@ -143,7 +140,8 @@ ALTER TABLE `likes`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `fk_post_parent_id` (`parent_id`);
 
 --
 -- Indexes for table `user`
@@ -167,19 +165,19 @@ ALTER TABLE `friendship`
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -203,6 +201,7 @@ ALTER TABLE `likes`
 -- Constraints for table `post`
 --
 ALTER TABLE `post`
+  ADD CONSTRAINT `fk_post_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 

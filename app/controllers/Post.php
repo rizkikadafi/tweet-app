@@ -37,8 +37,6 @@ class Post extends Controller
       $data['post']['like_count'] = $this->model('Post_model')->getPostLikes($data['post']['post_id']);
       $data['post']['interval_time'] = $intervalTime;
       $data['comments'] = $this->model('Post_model')->getPostComments($data['post']['post_id']);
-      // $data['parent_comments'] = $this->model('Post_model')->getParentComments($data['post']['post_id']);
-
 
       foreach ($data['comments'] as &$comment) {
         $intervalTime = $this->model('Post_model')->formatRelativeTime($comment['updated_at']);

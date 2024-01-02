@@ -49,7 +49,6 @@
                   <a href="<?= BASEURL; ?>/post/comment/<?= $post['post_id']; ?>" class="text-white link-underline link-underline-opacity-0 me-1">
                     <i class="bi bi-chat-left-dots"></i>
                   </a>
-                  <span class="text-white comment-count me-4" id="comment-count" data-post-id="<?= $post['post_id']; ?>">12</span>
                 </div>
               </div>
             </div>

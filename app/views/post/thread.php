@@ -1,6 +1,4 @@
 <main>
-  <?php // var_dump($data['parent_comments']) 
-  ?>
   <div class="container">
     <!-- <div class="row mt-3 justify-content-center"> -->
     <!--   <div class="col-7"> -->
@@ -43,7 +41,11 @@
                 <?php } else { ?>
                   <i class="bi bi-heart me-1 like-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-post-id="<?= $data['post']['post_id']; ?>"></i>
                 <?php } ?>
-                <span class="text-white like-count" id="like-count" data-post-id="<?= $data['post']['post_id']; ?>"><?= $data['post']['like_count']; ?></span>
+                <span class="text-white like-count me-3" id="like-count" data-post-id="<?= $data['post']['post_id']; ?>"><?= $data['post']['like_count']; ?></span>
+
+                <a href="<?= BASEURL; ?>/post/comment/<?= $data['post']['post_id']; ?>" class="text-white link-underline link-underline-opacity-0 me-1">
+                  <i class="bi bi-chat-left-dots"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -95,10 +97,6 @@
                       <i class="bi bi-heart me-1 like-btn" data-user-id="<?= $data['cur_user']['user_id']; ?>" data-post-id="<?= $comment['post_id']; ?>"></i>
                     <?php } ?>
                     <span class="text-white like-count me-4" id="like-count" data-post-id="<?= $comment['post_id']; ?>"><?= $comment['like_count']; ?></span>
-                    <a href="<?= BASEURL; ?>/post/comment/<?= $comment['post_id']; ?>" class="text-white link-underline link-underline-opacity-0 me-1">
-                      <i class="bi bi-chat-left-dots"></i>
-                    </a>
-                    <span class="text-white comment-count me-4" id="comment-count" data-post-id="<?= $comment['post_id']; ?>">12</span>
                   </div>
                 </div>
               </div>
