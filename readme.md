@@ -1,6 +1,6 @@
 # Info
 
-- BASEURL: http://localhost/uas-project/public
+- BASEURL: http://localhost/tweet-app/public
 - BASEURL/controller/method
 - Note:
   - Default controller: *home*
