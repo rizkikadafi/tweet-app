@@ -2,7 +2,7 @@
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
 $dotenv->load();
 
-define('BASEURL', 'http://localhost/uas-project/public');
+define('BASEURL', 'http://localhost/tweet-app/public');
 
 // database
 define('DB_HOST', $_ENV["DB_HOST"]);
